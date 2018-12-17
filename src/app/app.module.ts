@@ -9,6 +9,10 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AuthService } from './auth/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilmsComponent } from './shared/films/films.component';
+import { FilmService } from './shared/films/films.service';
+import { FilmEditorComponent } from './shared/films/film-editor/film-editor.component';
 
 @NgModule({
   declarations: [
@@ -16,15 +20,18 @@ import { AuthService } from './auth/auth.service';
     HeaderComponent,
     HomeComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    FilmsComponent,
+    FilmEditorComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, FilmService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

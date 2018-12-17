@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthService {
     createdAccountSuccess = false;
+    loginSuccess = false;
+    logoutSuccess = false;
     signupError = false;
     signinError = false;
     errorType = '';
@@ -30,6 +32,8 @@ export class AuthService {
         firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password).then(
             response => {
                 this.signinError = false;
+                this.loginSuccess = true;
+                this.logoutSuccess = false;
                 this.router.navigate(['/']);
                 firebase.auth().currentUser.getIdToken().then(
                     (token: string) => this.token = token
@@ -46,6 +50,8 @@ export class AuthService {
     logout() {
         firebase.auth().signOut();
         this.token = null;
+        this.loginSuccess = false;
+        this.logoutSuccess = true;
         this.router.navigate(['/']);
     }
 

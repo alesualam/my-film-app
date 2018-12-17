@@ -5,3 +5,11 @@ h2 {
 p {
     text-align: center
 }
+
+.alert {
+    text-align: center;
+}
+
+.btn-toolbar {
+    text-align: center;
+}

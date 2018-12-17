@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+      <div class="col-xs-10 col-md-7 list-group">
+        <hr>
+          <div class="film-item" *ngFor="let film of films; let i = index">
+              <a class="list-group-item" style="cursor: pointer" (click)="onEdit(i)">
+                <p><strong>{{ film.title }}</strong> ({{ film.status }}) {{ film.score }}
+              </a>
+          </div>
+      </div>
+      <div class="col-xs-10 col-md-5 list-group">
+        <hr>
+          <app-film-editor *ngIf="filmService.editMode"></app-film-editor>
+      </div>
+    </div>
+</div>
+<br><br><br>
