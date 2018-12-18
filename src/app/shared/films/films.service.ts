@@ -26,9 +26,9 @@ export class FilmService {
   }
 
   addFilm(film: Film) {
-     this.films.push(film);
-     this.orderFilms();
-     this.filmsChanged.next(this.films.slice());
+    this.films.push(film);
+    this.orderFilms();
+    this.filmsChanged.next(this.films.slice());
   }
 
    getFilm(index: number) {

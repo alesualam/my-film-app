@@ -32,14 +32,22 @@ export class FilmEditorComponent implements OnInit {
       this.subscription = this.filmService.startedEditing.subscribe(
         (index: number) => {
             this.editedFilm = this.filmService.getFilm(this.filmService.editedFilmIndex);
-            this.filmForm.setValue({
-              title: this.editedFilm.title,
-              desc: this.editedFilm.desc,
-              status: this.editedFilm.status,
-              date: this.editedFilm.date,
-              score: this.editedFilm.score,
-              fav: this.editedFilm.fav
-            });
+            if (this.editedFilm.status !== 'To-Watch') {
+              this.filmForm.setValue({
+                title: this.editedFilm.title,
+                desc: this.editedFilm.desc,
+                status: this.editedFilm.status,
+                date: this.editedFilm.date,
+                score: this.editedFilm.score,
+                fav: this.editedFilm.fav
+              });
+            } else {
+              this.filmForm.patchValue({
+                title: this.editedFilm.title,
+                desc: this.editedFilm.desc,
+                status: this.editedFilm.status,
+              });
+            }
         }
       )
       this.filmService.startedEditing.next(this.filmService.editedFilmIndex);
@@ -52,7 +60,7 @@ export class FilmEditorComponent implements OnInit {
 
   onSubmit() {
     const filmValues = this.filmForm.value;
-    const newFilm = new Film(filmValues.title, filmValues.desc, filmValues.status, filmValues.date, filmValues.score, filmValues.fav);
+    const newFilm = new Film(filmValues.title, filmValues.desc, filmValues.status, filmValues.date = null, filmValues.score = null, filmValues.fav = null);
 
     if (this.filmService.editMode) {
       this.filmService.updateFilm(this.filmService.editedFilmIndex, newFilm);
