@@ -32,6 +32,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
   onEdit(index: number) {
     this.filmService.editMode = true;
     this.filmService.editedFilmIndex = index;
-    console.log(index);
+    this.filmService.startedEditing.next(index);
   }
+
 }

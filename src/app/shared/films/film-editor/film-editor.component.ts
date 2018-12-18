@@ -18,8 +18,6 @@ export class FilmEditorComponent implements OnInit {
 
 
   ngOnInit() {
-    this.editedFilm = this.filmService.getFilm(this.filmService.editedFilmIndex);
-
     this.filmForm = new FormGroup({
       'title': new FormControl(null, [Validators.required]),
       'desc': new FormControl(null, [Validators.required]),
@@ -27,12 +25,18 @@ export class FilmEditorComponent implements OnInit {
       'score': new FormControl(null, [Validators.required])
     });
 
-    this.filmForm.setValue({
-      title: this.editedFilm.title,
-      desc: this.editedFilm.desc,
-      status: this.editedFilm.status,
-      score: this.editedFilm.score,
-    });
+    this.subscription = this.filmService.startedEditing.subscribe(
+      (index:number) => {
+        this.editedFilm = this.filmService.getFilm(this.filmService.editedFilmIndex);
+        this.filmForm.setValue({
+          title: this.editedFilm.title,
+          desc: this.editedFilm.desc,
+          status: this.editedFilm.status,
+          score: this.editedFilm.score,
+        });
+      }
+    )
+    this.filmService.startedEditing.next(this.filmService.editedFilmIndex);
   }
 
   onSubmit() {

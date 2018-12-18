@@ -6,11 +6,12 @@ export class FilmService {
     startedEditing = new Subject<number>();
     editMode = false;
     editedFilmIndex: number;
+    currentFilm: Film;
 
     private films: Film[] = [
       new Film('Title 1', 'Description 1', 'finished', 10),
       new Film('Title 2', 'Description 2', 'finished', 7),
-      new Film('Title 2', 'Description 2', 'finished', 7),
+      new Film('Title 3', 'Description 3', 'finished', 4),
     ];
 
   getFilms() {
