@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
-import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
+import { fadeOutOnLeaveAnimation } from 'angular-animations';
 
 @Component({
   selector: 'app-home',
@@ -14,27 +14,32 @@ export class HomeComponent implements OnInit {
 
   loginMessage = true;
   logoutMessage = true;
+  showList = false;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
-  onLogin() {
-    if(this.authService.loginSuccess) {
-        setTimeout(() => {
-          this.loginMessage = false;
-        }, 1500);
-        return this.loginMessage;
-    }
-  }
+  // onLogin() {
+  //   if(this.authService.loginSuccess) {
+  //       setTimeout(() => {
+  //         this.loginMessage = false;
+  //       }, 1500);
+  //       return this.loginMessage;
+  //   }
+  // }
 
-  onLogout() {
-    if(this.authService.logoutSuccess) {
-      setTimeout(() => {
-        this.logoutMessage = false;
-      }, 1500);
-      return this.logoutMessage;
-    }
+  // onLogout() {
+  //   if(this.authService.logoutSuccess) {
+  //     setTimeout(() => {
+  //       this.logoutMessage = false;
+  //     }, 1500);
+  //     return this.logoutMessage;
+  //   }
+  // }
+
+  onView() {
+    this.showList = !this.showList;
   }
 }

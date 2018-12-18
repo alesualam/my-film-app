@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilmsComponent } from './shared/films/films.component';
 import { FilmService } from './shared/films/films.service';
 import { FilmEditorComponent } from './shared/films/film-editor/film-editor.component';
+import { FilterPipe } from './shared/films/filter.pipe';
+import { SimpleSmoothScrollModule } from 'ng2-simple-smooth-scroll';
 
 @NgModule({
   declarations: [
@@ -23,13 +25,15 @@ import { FilmEditorComponent } from './shared/films/film-editor/film-editor.comp
     SigninComponent,
     FilmsComponent,
     FilmEditorComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SimpleSmoothScrollModule,
   ],
   providers: [AuthService, FilmService],
   bootstrap: [AppComponent]

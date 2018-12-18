@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'my-custom-app';
+  title = 'FilmApp';
 
   ngOnInit() {
     firebase.initializeApp({

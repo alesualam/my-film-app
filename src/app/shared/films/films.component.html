@@ -2,15 +2,32 @@
   <div class="row">
       <div class="col-xs-10 col-md-7 list-group">
         <hr>
-          <div class="film-item" *ngFor="let film of films; let i = index">
-              <a class="list-group-item" style="cursor: pointer" (click)="onEdit(i)">
+
+        <div class="btn-group btn-group-sm" role="group" aria-label="Filters">
+            <button type="button" class="btn btn-success" (click)="onEdit()">+Add ({{ filmService.filterStatus }})</button>
+            <button type="button" class="btn btn-secondary" (click)="onFilter('')"
+            [ngClass]="filmService.filterStatus == '' ? 'active' : ''">All</button>
+            <button type="button" class="btn btn-secondary" (click)="onFilter('Favorite')"
+            [ngClass]="filmService.filterStatus == 'Favorite' ? 'active' : ''">Favorite</button>
+            <button type="button" class="btn btn-secondary" (click)="onFilter('Finished')"
+            [ngClass]="filmService.filterStatus == 'Finished' ? 'active' : ''">Finished</button>
+            <button type="button" class="btn btn-secondary" (click)="onFilter('To-Watch')"
+            [ngClass]="filmService.filterStatus == 'To-Watch' ? 'active' : ''">To-Watch</button>
+        </div>
+        <br>
+
+          <div class="film-item" *ngFor="let film of films | filter:filmService.filterStatus:'satus'; let i = index">
+              <a class="list-group-item {{ film.status }} fav-{{ film.fav }}" style="cursor: pointer;" (click)="onEdit(film)"
+              SimpleSmoothScroll [scrollTo]="'editor'" [duration]="250">
                 <p><strong>{{ film.title }}</strong> ({{ film.status }}) {{ film.score }}
+                <button class="btn-sm btn-danger float-right" (click)="onDelete(film)">X</button>
               </a>
           </div>
       </div>
       <div class="col-xs-10 col-md-5 list-group">
         <hr>
-          <app-film-editor *ngIf="filmService.editMode"></app-film-editor>
+          <app-film-editor *ngIf="filmService.editMode" id="editor"></app-film-editor>
+          <app-film-editor *ngIf="filmService.createMode" id="editor"></app-film-editor>
       </div>
     </div>
 </div>

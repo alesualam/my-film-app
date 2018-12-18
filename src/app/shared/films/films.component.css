@@ -1,3 +1,16 @@
 .list-group-item {
     margin-bottom: 5px;
 }
+
+.Finished {
+    background-color: lightgreen;
+}
+
+.fav-true {
+    background-color: lightgoldenrodyellow;
+    border-color: yellow;
+}
+
+.To-Watch {
+    background-color: lightsalmon;
+}

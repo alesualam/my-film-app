@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-        <form class="form-inline" [formGroup]="filmForm">
+      <br>
+      <br>
+        <form class="form-inline" [formGroup]="filmForm" (ngSubmit)="onSubmit()">
 
             <div class="input-group mb-2 mr-sm-2">
               <div class="input-group-prepend">
@@ -11,12 +13,21 @@
             </div>
 
             <div class="input-group mb-2 mr-sm-2">
-              <div class="input-group-prepend">
-                <div class="input-group-text">Status</div>
-              </div>
-              <input type="text" class="form-control" id="title" formControlName="status">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Status</div>
+                  </div>
+                <select class="custom-select" class="form-control" id="status" formControlName="status">
+                  <option value="{{ status }}" *ngFor="let status of filmService.status_p; let i = index">{{ status }}</option>
+                </select>
             </div>
 
+            <div class="input-group mb-2 mr-sm-2" *ngIf="!(filmForm.value.status !== 'Finished')">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Date</div>
+                </div>
+                <input type="date" class="form-control" id="date" formControlName="date"
+                placeholder="yyyy-MM-dd"/>
+            </div>
 
             <div class="input-group mb-2 mr-sm-2">
               <div class="input-group-prepend">
@@ -25,17 +36,31 @@
               <input type="text" class="form-control" id="desc" formControlName="desc">
             </div>
 
-            <div class="input-group mb-2 mr-sm-2">
-              <div class="input-group-prepend">
-                <div class="input-group-text">Score</div>
-              </div>
-              <input type="text" class="form-control" id="score" formControlName="score">
+            <div class="input-group mb-2 mr-sm-2" *ngIf="!(filmForm.value.status !== 'Finished')">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Score</div>
+                </div>
+              <select class="custom-select" class="form-control" id="score" formControlName="score">
+                <option value="{{ score }}" *ngFor="let score of filmService.scores; let i = index">{{ score }}</option>
+              </select>
+            </div>
+
+            <div class="input-group mb-2 mr-sm-2" *ngIf="!(filmForm.value.status !== 'Finished')">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Favorite</div>
+                </div>
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <input type="checkbox" aria-label="Fav" formControlName="fav" id="fav">
+                  </div>
+                </div>
             </div>
 
           <div class="text-center">
             <div class="btn-group">
-              <button type="submit" class="btn btn-success mb-2" (click)="onSubmit()">Save</button>
-              <button type="button" class="btn btn-danger mb-2" (click)="onCancel()">Cancel</button>
+              <button type="button" class="btn btn-success mb-2" [disabled]="!filmForm.valid" (click)="onSubmit()">Save</button>
+              <button type="button" class="btn btn-secondary mb-2" (click)="onClear()">Clear</button>
+              <button type="button" class="btn btn-primary mb-2" (click)="onCancel()">Cancel</button>
             </div>
           </div>
           </form>
