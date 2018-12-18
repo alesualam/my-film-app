@@ -27,7 +27,7 @@ export class FilmService {
 
   addFilm(film: Film) {
     this.films.push(film);
-    this.orderFilms();
+    //this.orderFilms();
     this.filmsChanged.next(this.films.slice());
   }
 
@@ -36,8 +36,10 @@ export class FilmService {
    }
 
    updateFilm(index: number, newFilm: Film) {
+     console.log(index, newFilm);
      this.films[index] = newFilm;
-     this.orderFilms();
+     //this.orderFilms();
+     console.log(this.films);
      this.filmsChanged.next(this.films.slice());
    }
 
@@ -52,7 +54,7 @@ export class FilmService {
   }
 
   orderFilms() {
-    const myfilms = this.films.slice();
+    const myfilms = this.films;
     const myfavfilms = myfilms.filter(film => film.fav == true).sort(this.sortbyname);
     const myfinishedfilms = myfilms.filter(film => (film.fav == false && film.status == 'Finished')).sort(this.sortbyname);
     const mytowatchfilms = myfilms.filter(film => film.status == 'To-Watch').sort(this.sortbyname);

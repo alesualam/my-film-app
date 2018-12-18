@@ -10,3 +10,15 @@
     background-color: rgb(252, 252, 181);
     border-color: yellow;
 }
+
+.low-score {
+    color: red;
+}
+
+.mid-score {
+    color: orange;
+}
+
+.high-score {
+    color: green;
+}

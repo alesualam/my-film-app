@@ -17,7 +17,8 @@
           <div class="film-item" *ngFor="let film of films | filter:filmService.filterStatus:'satus'; let i = index">
               <a class="list-group-item {{ film.status }} fav-{{ film.fav }}" style="cursor: pointer;" (click)="onEdit(film)"
               SimpleSmoothScroll [scrollTo]="'editor'" [duration]="250">
-                <strong>{{ film.title }}</strong> ({{ film.score }})
+                <strong>{{ film.title }}</strong><span class="score"
+                [ngClass]="film.score <= 4 ? 'low-score' : film.score <= 7 ? 'mid-score' : 'high-score'">  ({{ film.score }})</span>
                 <button class="btn-sm btn-secondary float-right" style="margin-top: -1%;" (click)="onDelete(film)">X</button>
               </a>
           </div>
