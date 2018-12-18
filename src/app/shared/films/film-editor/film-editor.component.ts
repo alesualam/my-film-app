@@ -21,7 +21,7 @@ export class FilmEditorComponent implements OnInit {
   ngOnInit() {
     this.filmForm = new FormGroup({
       'title': new FormControl(null, [Validators.required]),
-      'desc': new FormControl(null),
+      'desc': new FormControl(null, [Validators.required]),
       'status': new FormControl(null, [Validators.required]),
       'date': new FormControl(null),
       'score': new FormControl(null),

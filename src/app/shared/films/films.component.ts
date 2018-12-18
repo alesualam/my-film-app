@@ -3,6 +3,7 @@ import { FilmService } from './films.service';
 import { Film } from './film.model';
 import { Subscription } from 'rxjs';
 import { SimpleSmoothScrollService } from 'ng2-simple-smooth-scroll';
+import { DataStorageService } from '../data-storage.service';
 
 @Component({
   selector: 'app-films',
@@ -14,9 +15,10 @@ export class FilmsComponent implements OnInit, OnDestroy {
   films: Film[];
   private subscription: Subscription;
 
-  constructor(private filmService: FilmService, private smooth: SimpleSmoothScrollService) { }
+  constructor(private filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService) { }
 
   ngOnInit() {
+    this.storage.getFilms();
     this.films = this.filmService.getFilms();
     this.subscription = this.filmService.filmsChanged
       .subscribe(

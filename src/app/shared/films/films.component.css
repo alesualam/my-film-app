@@ -3,14 +3,10 @@
 }
 
 .Finished {
-    background-color: lightgreen;
+    background-color: rgb(198, 253, 198);
 }
 
 .fav-true {
-    background-color: lightgoldenrodyellow;
+    background-color: rgb(252, 252, 181);
     border-color: yellow;
-}
-
-.To-Watch {
-    background-color: lightsalmon;
 }

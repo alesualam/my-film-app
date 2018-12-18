@@ -9,22 +9,17 @@
         <li class="nav-item">
             <a class="nav-link" routerLink="/">Home</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
-        </li>
+        </li> -->
       </ul>
       <ul class="navbar-nav ml-auto">
         <ng-template [ngIf]="userAuthenticated()">
-          <li class="nav-item dropdown">
-            <a style="cursor: pointer" class="nav-link dropdown-toggle ml-auto" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="" (click)="onDropdown()">
-              My Profile
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" [ngClass]="dropStatus ? 'show' : 'hide'">
-              <a class="dropdown-item" href="#">Details</a>
-              <a class="dropdown-item" href="#">Another Link</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link" (click)="onSave()" style="cursor: pointer;">Save Data</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" (click)="onFetch()" style="cursor: pointer;">Fetch Data</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" (click)="onLogout()" style="cursor: pointer;">Logout</a>

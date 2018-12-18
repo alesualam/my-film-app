@@ -13,8 +13,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilmsComponent } from './shared/films/films.component';
 import { FilmService } from './shared/films/films.service';
 import { FilmEditorComponent } from './shared/films/film-editor/film-editor.component';
-import { FilterPipe } from './shared/films/filter.pipe';
+
 import { SimpleSmoothScrollModule } from 'ng2-simple-smooth-scroll';
+import { FilterPipe } from './shared/filter.pipe';
+import { DataStorageService } from './shared/data-storage.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { AuthInterceptor } from "./shared/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -25,7 +30,7 @@ import { SimpleSmoothScrollModule } from 'ng2-simple-smooth-scroll';
     SigninComponent,
     FilmsComponent,
     FilmEditorComponent,
-    FilterPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -34,8 +39,9 @@ import { SimpleSmoothScrollModule } from 'ng2-simple-smooth-scroll';
     FormsModule,
     ReactiveFormsModule,
     SimpleSmoothScrollModule,
+    HttpClientModule
   ],
-  providers: [AuthService, FilmService],
+  providers: [AuthService, FilmService, DataStorageService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

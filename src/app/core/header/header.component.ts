@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { HttpEvent } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,7 @@ export class HeaderComponent implements OnInit {
   dropStatus = false;
   expandStatus = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private storage: DataStorageService) { }
 
   ngOnInit() {
   }
@@ -30,5 +32,17 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  onFetch() {
+    this.storage.getFilms();
+  }
+
+  onSave() {
+    this.storage.storeFilms().subscribe(
+      (response: HttpEvent<Object>) => {
+        console.log(response);
+      }
+    );
   }
 }

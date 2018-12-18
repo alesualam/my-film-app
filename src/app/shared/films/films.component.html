@@ -1,8 +1,6 @@
 <div class="container">
   <div class="row">
       <div class="col-xs-10 col-md-7 list-group">
-        <hr>
-
         <div class="btn-group btn-group-sm" role="group" aria-label="Filters">
             <button type="button" class="btn btn-success" (click)="onEdit()">+Add ({{ filmService.filterStatus }})</button>
             <button type="button" class="btn btn-secondary" (click)="onFilter('')"
@@ -19,8 +17,8 @@
           <div class="film-item" *ngFor="let film of films | filter:filmService.filterStatus:'satus'; let i = index">
               <a class="list-group-item {{ film.status }} fav-{{ film.fav }}" style="cursor: pointer;" (click)="onEdit(film)"
               SimpleSmoothScroll [scrollTo]="'editor'" [duration]="250">
-                <p><strong>{{ film.title }}</strong> ({{ film.status }}) {{ film.score }}
-                <button class="btn-sm btn-danger float-right" (click)="onDelete(film)">X</button>
+                <strong>{{ film.title }}</strong> ({{ film.score }})
+                <button class="btn-sm btn-secondary float-right" style="margin-top: -1%;" (click)="onDelete(film)">X</button>
               </a>
           </div>
       </div>

@@ -9,21 +9,14 @@ export class FilmService {
     editedFilmIndex: number;
     currentFilm: Film;
     filterStatus = '';
-    scores = Array.from(Array(11).keys());
+    scores = Array.from(Array(11).keys()).reverse();
     status_p = [
       'Finished',
       'To-Watch',
     ]
 
     private films: Film[] = [
-      new Film('Title 1', 'Description 1', 'Finished', new Date(), 10, true),
-      new Film('Title 2', 'Description 2', 'To-Watch', new Date(), 7, false),
-      new Film('Title 3', 'Description 3', 'To-Watch', new Date(), 4, false),
-      new Film('AAAAA', 'Description 4', 'Finished', new Date(), 4, false),
-      new Film('BBBBBB', 'Description 4', 'Finished', new Date(), 4, false),
-      new Film('QWEQWE', 'Description 4', 'To-Watch', new Date(), 4, false),
-      new Film('IIIII', 'Description 4', 'Finished', new Date(), 4, true),
-      new Film('MMMMM', 'Description 4', 'To-Watch', new Date(), 4, false),
+
     ];
 
   getFilms() {
@@ -44,11 +37,17 @@ export class FilmService {
 
    updateFilm(index: number, newFilm: Film) {
      this.films[index] = newFilm;
+     this.orderFilms();
      this.filmsChanged.next(this.films.slice());
    }
 
   deleteIngredient(index: number) {
     this.films.splice(index, 1);
+    this.filmsChanged.next(this.films.slice());
+  }
+
+  setFilms(films: Film[]) {
+    this.films = films;
     this.filmsChanged.next(this.films.slice());
   }
 
