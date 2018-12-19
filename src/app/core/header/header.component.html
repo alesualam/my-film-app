@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" routerLink="/">FilmApp</a>
     <button (click)="onExpand()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,29 +7,26 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="expandStatus ? 'show' : 'hide'">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" routerLink="/">Home</a>
+            <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li> -->
       </ul>
       <ul class="navbar-nav ml-auto">
         <ng-template [ngIf]="userAuthenticated()">
-          <li class="nav-item">
+          <li class="nav-item mr-2">
             <a class="nav-link" (click)="onSave()" style="cursor: pointer;">Save Data</a>
           </li>
-          <li class="nav-item">
-              <a class="nav-link" (click)="onFetch()" style="cursor: pointer;">Fetch Data</a>
+          <li class="nav-item mr-2">
+              <a class="nav-link" (click)="onFetch()" style="cursor: pointer;">Undo</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-2">
             <a class="nav-link" (click)="onLogout()" style="cursor: pointer;">Logout</a>
           </li>
         </ng-template>
         <ng-template [ngIf]="!userAuthenticated()">
-          <li class="nav-item">
+          <li class="nav-item mr-2">
               <a class="nav-link" routerLink="/signin" routerLinkActive="active">Sign in</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-2">
               <a class="nav-link" routerLink="/signup" routerLinkActive="active">Register</a>
           </li>
         </ng-template>

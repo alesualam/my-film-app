@@ -9,6 +9,7 @@ export class FilmService {
     editedFilmIndex: number;
     currentFilm: Film;
     filterStatus = '';
+    unsavedData = false;
     scores = Array.from(Array(11).keys()).reverse();
     status_p = [
       'Finished',
@@ -27,6 +28,7 @@ export class FilmService {
 
   addFilm(film: Film) {
     this.films.push(film);
+    this.unsavedData = true;
     this.orderFilms();
     this.filmsChanged.next(this.films.slice());
   }
@@ -37,12 +39,14 @@ export class FilmService {
 
   updateFilm(index: number, newFilm: Film) {
     this.films[index] = newFilm;
+    this.unsavedData = true;
     this.orderFilms();
     this.filmsChanged.next(this.films.slice());
   }
 
-  deleteIngredient(index: number) {
+  deleteFilm(index: number) {
     this.films.splice(index, 1);
+    this.unsavedData = true;
     this.filmsChanged.next(this.films.slice());
   }
 
@@ -69,4 +73,5 @@ export class FilmService {
     }
     return 0;
   }
+
 }

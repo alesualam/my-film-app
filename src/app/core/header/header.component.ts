@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { HttpEvent } from '@angular/common/http';
 import { FilmService } from 'src/app/shared/films/films.service';
+import { Film } from 'src/app/shared/films/film.model';
 
 @Component({
   selector: 'app-header',
@@ -32,18 +33,31 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.logout();
-    this.filmService.editMode = false;
-    this.filmService.createMode = false;
+    let exit = true;
+    if (this.filmService.unsavedData) {
+      exit = confirm("There is unsaved data. All changes will be lost.");
+    }
+    if (exit) {
+      this.authService.logout();
+      this.filmService.editMode = false;
+      this.filmService.createMode = false;
+    }
   }
 
   onFetch() {
-    this.storage.getFilms();
+    let undo = true;
+    if (this.filmService.unsavedData) {
+      undo = confirm("Are you sure?");
+    }
+    if (undo) {
+      this.storage.getFilms();
+    }
   }
 
   onSave() {
     this.storage.storeFilms().subscribe(
       (response: HttpEvent<Object>) => {
+        this.filmService.unsavedData = false;
         console.log(response);
       }
     );

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { fadeOutOnLeaveAnimation } from 'angular-animations';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
-import { HttpEvent } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -14,13 +13,18 @@ import { HttpEvent } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
-  loginMessage = true;
-  logoutMessage = true;
+  loginMessage = this.authService.loginSuccess;
 
-  constructor(private authService: AuthService, private storage: DataStorageService) { }
+  constructor(private authService: AuthService, private storage: DataStorageService) {
+    setTimeout(() => {
+      this.loginMessage = false;
+    }, 2000);
+  }
 
   ngOnInit() {
+    
   }
+
 
   // MEMORY LEAK, TODO
 

@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Description: Simple app for saving films you have watched or plan to watch in the future with the Firebase backend.
 
 - FEATURES:
-    - Save data in your list including various details.
+    - Save data in your list including multiple details.
     - Filter your data to ease the access.
     - Multi account.
 

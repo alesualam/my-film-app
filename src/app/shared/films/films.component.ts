@@ -47,7 +47,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
   }
 
   onDelete(film: Film) {
-    this.filmService.deleteIngredient(this.filmService.getFilms().indexOf(film));
+    this.filmService.deleteFilm(this.filmService.getFilms().indexOf(film));
     this.filmService.editMode = false;
     this.filmService.createMode = false;
   }

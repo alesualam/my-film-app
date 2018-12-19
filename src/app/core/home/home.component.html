@@ -1,12 +1,11 @@
 <div class="container">
     <div class="row align-items-center">
         <div class="col-xs-12 col-sm-12 col-md-10 mx-auto">
-            <!-- <div class="alert alert-success" role="alert" *ngIf="onLogin()" [@fadeOutOnLeave]>
+
+            <div class="alert alert-success" role="alert" *ngIf="loginMessage">
                 <strong>Successfully logged in!</strong>
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="onLogout()" [@fadeOutOnLeave]>
-                <strong>Successfully logged out!</strong>
-            </div> -->
+
             <br>
             <ng-template [ngIf]="!authService.token">
             <h2>Welcome to FilmApp!</h2>
