@@ -52,9 +52,7 @@ export class FilmEditorComponent implements OnInit {
 
   onSubmit() {
     const filmValues = this.filmForm.value;
-    const newFilm = new Film(filmValues.title, filmValues.desc, filmValues.status, filmValues.date, filmValues.score, filmValues.favs);
-
-    console.log(this.filmService.editMode);
+    const newFilm = new Film(filmValues.title, filmValues.desc, filmValues.status, filmValues.date, filmValues.score, filmValues.fav);
 
     if (this.filmService.editMode) {
       this.filmService.updateFilm(this.filmService.editedFilmIndex, newFilm);

@@ -27,21 +27,19 @@ export class FilmService {
 
   addFilm(film: Film) {
     this.films.push(film);
-    //this.orderFilms();
+    this.orderFilms();
     this.filmsChanged.next(this.films.slice());
   }
 
-   getFilm(index: number) {
-     return this.films[index];
-   }
+  getFilm(index: number) {
+    return this.films[index];
+  }
 
-   updateFilm(index: number, newFilm: Film) {
-     console.log(index, newFilm);
-     this.films[index] = newFilm;
-     //this.orderFilms();
-     console.log(this.films);
-     this.filmsChanged.next(this.films.slice());
-   }
+  updateFilm(index: number, newFilm: Film) {
+    this.films[index] = newFilm;
+    this.orderFilms();
+    this.filmsChanged.next(this.films.slice());
+  }
 
   deleteIngredient(index: number) {
     this.films.splice(index, 1);
@@ -53,11 +51,11 @@ export class FilmService {
     this.filmsChanged.next(this.films.slice());
   }
 
-  orderFilms() {
+  orderFilms() { // PROBLEM HERE
     const myfilms = this.films;
-    const myfavfilms = myfilms.filter(film => film.fav == true).sort(this.sortbyname);
-    const myfinishedfilms = myfilms.filter(film => (film.fav == false && film.status == 'Finished')).sort(this.sortbyname);
-    const mytowatchfilms = myfilms.filter(film => film.status == 'To-Watch').sort(this.sortbyname);
+    const myfavfilms = myfilms.filter(film => film.fav === true).sort(this.sortbyname);
+    const myfinishedfilms = myfilms.filter(film => (film.fav === false && film.status === 'Finished')).sort(this.sortbyname);
+    const mytowatchfilms = myfilms.filter(film => film.status === 'To-Watch').sort(this.sortbyname);
 
     this.films = Array.prototype.concat(myfavfilms, myfinishedfilms, mytowatchfilms);
   }
