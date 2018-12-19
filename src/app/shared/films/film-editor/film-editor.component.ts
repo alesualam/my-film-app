@@ -53,8 +53,11 @@ export class FilmEditorComponent implements OnInit {
       )
       this.filmService.startedEditing.next(this.filmService.editedFilmIndex);
       } else {
+        const patched_status = this.filmService.filterStatus === 'Favorite' ? 'Finished' : this.filmService.filterStatus;
+        const patched_fav = this.filmService.filterStatus === 'Favorite' ? true : false;
         this.filmForm.patchValue({
-          status: this.filmService.filterStatus
+          status: patched_status,
+          fav: patched_fav
         })
       }
   }
@@ -72,10 +75,8 @@ export class FilmEditorComponent implements OnInit {
       this.filmService.updateFilm(this.filmService.editedFilmIndex, newFilm);
       this.filmService.editMode = false;
     } else {
-      if (newFilm.date === null) {
-        newFilm.date = new Date();
-      }
-      console.log(newFilm.date);
+      newFilm.date = newFilm.date === null ? new Date() : newFilm.date;
+      newFilm.desc = newFilm.desc === null ? '' : newFilm.desc;
       this.filmService.addFilm(newFilm);
       this.filmService.createMode = false;
     }

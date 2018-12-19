@@ -11,7 +11,7 @@ export class DataStorageService {
     constructor(private httpClient: HttpClient, private filmService: FilmService, private authService: AuthService) {}
 
     storeFilms() {
-        const req = new HttpRequest('PUT', 'https://ng-custom-app.firebaseio.com/films.json', this.filmService.getFilms(), {
+        const req = new HttpRequest('PUT', 'https://ng-custom-app.firebaseio.com/' + this.authService.getUid() + '/films.json', this.filmService.getFilms(), {
             reportProgress: true,
         });
         console.log(req);
@@ -21,11 +21,14 @@ export class DataStorageService {
     getFilms() {
         const token = this.authService.getToken();
 
-        this.httpClient.get<Film[]>('https://ng-custom-app.firebaseio.com/films.json', {
+        this.httpClient.get<Film[]>('https://ng-custom-app.firebaseio.com/' + this.authService.getUid() + '/films.json', {
         })
         .subscribe(
-            (recipes: Film[]) => {
-                this.filmService.setFilms(recipes);
+            (films: Film[]) => {
+                if (films === null) {
+                    films = [];
+                }
+                this.filmService.setFilms(films);
             }
         )
     }

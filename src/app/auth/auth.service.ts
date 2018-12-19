@@ -1,6 +1,7 @@
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { FilmService } from '../shared/films/films.service';
 
 @Injectable()
 export class AuthService {
@@ -64,5 +65,9 @@ export class AuthService {
 
     isAuthenticated() {
         return this.token != null;
+    }
+
+    getUid() {
+        return firebase.auth().currentUser.uid;
     }
 }

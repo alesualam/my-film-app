@@ -30,6 +30,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.filmService.setFilms([]);
   }
 
   onEdit(film: Film = null) {
