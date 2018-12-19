@@ -51,7 +51,7 @@ export class FilmService {
     this.filmsChanged.next(this.films.slice());
   }
 
-  orderFilms() { // PROBLEM HERE
+  orderFilms() {
     const myfilms = this.films;
     const myfavfilms = myfilms.filter(film => film.fav === true).sort(this.sortbyname);
     const myfinishedfilms = myfilms.filter(film => (film.fav === false && film.status === 'Finished')).sort(this.sortbyname);
