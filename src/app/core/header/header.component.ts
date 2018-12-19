@@ -54,6 +54,7 @@ export class HeaderComponent implements OnInit {
     }
     if (undo) {
       this.storage.getFilms();
+      this.filmService.unsavedData = false;
     }
   }
 
