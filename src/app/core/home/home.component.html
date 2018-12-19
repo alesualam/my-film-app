@@ -1,21 +1,14 @@
 <div class="container">
     <div class="row align-items-center">
         <div class="col-xs-12 col-sm-12 col-md-10 mx-auto">
-
-            <div class="alert alert-success" role="alert" *ngIf="loginMessage">
-                <strong>Successfully logged in!</strong>
-            </div>
-
-            <br>
-            <ng-template [ngIf]="!authService.token">
-            <h2>Welcome to FilmApp!</h2>
+            <h2 class="mt-5">Welcome to FilmApp!</h2>
             <hr>
-            <p *ngIf="!authService.token">Please <a routerLink="/signin">sign in</a> or <a routerLink="/signup">create an account</a> to start working.</p>
+            <ng-template [ngIf]="!authService.token">  
+                <p>Please <a routerLink="/signin">sign in</a> or <a routerLink="/signup">create an account</a> to start working.</p>
             </ng-template>
             <ng-template [ngIf]="authService.token">
-                <p>Edit the list as you wish!</p>
+                <p>Select an option to start working with <strong>FilmApp</strong></p>
             </ng-template>
-            <app-films *ngIf="authService.token"></app-films>
         </div>
     </div>
 </div>

@@ -1,0 +1,20 @@
+<div class="alert alert-success" role="alert" *ngIf="loginMessage" [@fadeOutOnLeave]
+style="text-align: center">
+    <div class="login mt-1 mb-1">
+      <strong>Succesfully Logged In!</strong>
+    </div>
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="logoutMessage" [@fadeOutOnLeave]
+style="text-align: center">
+    <div class="login mt-1 mb-1">
+      <strong>Succesfully Logged Out!</strong>
+    </div>
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="saveMessage" [@fadeOutOnLeave]
+style="text-align: center">
+    <div class="login mt-1 mb-1">
+      <strong>Data saved!</strong>
+    </div>
+</div>

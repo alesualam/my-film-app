@@ -1,10 +1,13 @@
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { FilmService } from '../shared/films/films.service';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class AuthService {
+    loginObservable = new Subject<boolean>();
+    logoutObservable = new Subject<boolean>();
+
     createdAccountSuccess = false;
     loginSuccess = false;
     logoutSuccess = false;
@@ -34,6 +37,7 @@ export class AuthService {
             response => {
                 this.signinError = false;
                 this.loginSuccess = true;
+                this.loginObservable.next(this.loginSuccess);
                 this.logoutSuccess = false;
                 this.router.navigate(['/']);
                 firebase.auth().currentUser.getIdToken().then(
@@ -53,6 +57,7 @@ export class AuthService {
         this.token = null;
         this.loginSuccess = false;
         this.logoutSuccess = true;
+        this.logoutObservable.next(this.logoutSuccess);
         this.router.navigate(['/']);
     }
 

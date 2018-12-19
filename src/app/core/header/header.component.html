@@ -6,9 +6,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="expandStatus ? 'show' : 'hide'">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <li class="nav-item mr-2">
             <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
         </li>
+        <ng-template [ngIf]="authService.token">
+        <li class="nav-item mr-2">
+            <a class="nav-link" routerLink="/films" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">My Films</a>
+        </li>
+        </ng-template>
       </ul>
       <ul class="navbar-nav ml-auto">
         <ng-template [ngIf]="userAuthenticated()">

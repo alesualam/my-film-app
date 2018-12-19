@@ -13,12 +13,9 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
 })
 export class HomeComponent implements OnInit {
 
-  loginMessage = this.authService.loginSuccess;
 
   constructor(private authService: AuthService, private storage: DataStorageService) {
-    setTimeout(() => {
-      this.loginMessage = false;
-    }, 2000);
+
   }
 
   ngOnInit() {

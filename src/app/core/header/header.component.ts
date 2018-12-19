@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { HttpEvent } from '@angular/common/http';
 import { FilmService } from 'src/app/shared/films/films.service';
-import { Film } from 'src/app/shared/films/film.model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +14,9 @@ export class HeaderComponent implements OnInit {
 
   dropStatus = false;
   expandStatus = false;
+
+  saveObservable = new Subject<boolean>();
+  saveSuccess = false;
 
   constructor(private authService: AuthService, private storage: DataStorageService, private filmService: FilmService) { }
 
@@ -58,6 +61,8 @@ export class HeaderComponent implements OnInit {
     this.storage.storeFilms().subscribe(
       (response: HttpEvent<Object>) => {
         this.filmService.unsavedData = false;
+        this.storage.saveSuccess = true;
+        this.storage.saveObservable.next(this.storage.saveSuccess);
         console.log(response);
       }
     );

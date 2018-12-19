@@ -20,6 +20,7 @@ import { DataStorageService } from './shared/data-storage.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthInterceptor } from "./shared/auth.interceptor";
+import { NotificationsComponent } from './core/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AuthInterceptor } from "./shared/auth.interceptor";
     SigninComponent,
     FilmsComponent,
     FilmEditorComponent,
-    FilterPipe
+    FilterPipe,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,

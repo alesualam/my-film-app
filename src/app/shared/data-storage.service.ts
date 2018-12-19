@@ -5,9 +5,14 @@ import { Film } from "./films/film.model";
 import 'rxjs/Rx';
 import { AuthService } from "../auth/auth.service";
 import { HttpClient, HttpParams, HttpRequest } from "@angular/common/http";
+import { Subject } from 'rxjs/Rx';
 
 @Injectable()
 export class DataStorageService {
+
+    saveObservable = new Subject<boolean>();
+    saveSuccess = false;
+
     constructor(private httpClient: HttpClient, private filmService: FilmService, private authService: AuthService) {}
 
     storeFilms() {
