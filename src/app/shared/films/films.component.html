@@ -3,7 +3,7 @@
       <div class="col-xs-10 col-md-6 list-group">
         <br><br>
         <div class="btn-group btn-group-sm" role="group" aria-label="Filters">
-            <button type="button" class="btn btn-success" (click)="onEdit()">+Add ({{ filmService.filterStatus }})</button>
+            <button type="button" class="btn btn-success" [routerLink]="[new]" (click)="onEdit()">+Add ({{ filmService.filterStatus }})</button>
             <button type="button" class="btn btn-secondary" (click)="onFilter('')"
             [ngClass]="filmService.filterStatus == '' ? 'active' : ''">All</button>
             <button type="button" class="btn btn-secondary" (click)="onFilter('Favorite')"
@@ -15,17 +15,21 @@
         </div>
         <br>
 
-          <div class="film-item" *ngFor="let film of films | filter:filmService.filterStatus:'satus'; let i = index">
-              <a class="list-group-item {{ film.status }} fav-{{ film.fav }}" style="cursor: pointer;" (click)="onEdit(film)"
-              SimpleSmoothScroll [scrollTo]="'editor'" [duration]="250">
-                <strong>{{ film.title }}</strong><span class="score"
-                [ngClass]="film.score <= 4 ? 'low-score' : film.score <= 7 ? 'mid-score' : 'high-score'" *ngIf="film.score">  ({{ film.score }})</span>
-                <button class="btn-sm btn-secondary float-right" style="margin-top: -1%;" (click)="onDelete(film)">X</button>
-              </a>
-          </div>
+        <ul class="list-group">
+            <li class="list-group-item {{ film.status }} fav-{{ film.fav }}" style="cursor: pointer;" (click)="onEdit(film)"
+            SimpleSmoothScroll [scrollTo]="'editor'" [duration]="250"
+            *ngFor="let film of films | filter:filmService.filterStatus:'satus'; let i = index">
+              <strong>{{ film.title }}</strong>
+              <span class="score" [ngClass]="film.score <= 4 ? 'low-score' : film.score <= 7 ? 'mid-score' : 'high-score'" *ngIf="film.score">
+              ({{ film.score }})
+              </span>
+              <button class="btn-sm btn-primary float-right" (click)="onDelete(film)">X</button>
+            </li>
+        </ul>
+
       </div>
       <div class="col-xs-10 col-md-6 list-group">
-        <hr><br><br>
+        <hr><br><br><br>
           <app-film-editor *ngIf="filmService.editMode" id="editor"></app-film-editor>
           <app-film-editor *ngIf="filmService.createMode" id="editor"></app-film-editor>
       </div>
