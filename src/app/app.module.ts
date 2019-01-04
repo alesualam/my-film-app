@@ -23,6 +23,7 @@ import { AuthInterceptor } from "./shared/auth.interceptor";
 import { NotificationsComponent } from './core/notifications/notifications.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ImagesService } from './shared/images.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     HttpClientModule,
     NgxPaginationModule,
   ],
-  providers: [AuthService, FilmService, DataStorageService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},],
+  providers: [AuthService, FilmService, DataStorageService, 
+    ImagesService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

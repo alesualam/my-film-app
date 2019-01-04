@@ -11,7 +11,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log("Intercepted", req);
-        const copiedReq = req.clone({params: req.params.set('auth', this.authService.getToken())});
+        let token = '';
+        try {
+            token = this.authService.getToken();
+        } catch {}
+        const copiedReq = req.clone({params: req.params.set('auth', token)});
         return next.handle(copiedReq);
     }
 }

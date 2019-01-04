@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { fadeOutOnLeaveAnimation } from 'angular-animations';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { ImagesService } from 'src/app/shared/images.service';
+import { Subscription } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-home',
@@ -13,34 +17,9 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
 })
 export class HomeComponent implements OnInit {
 
-
-  constructor(private authService: AuthService, private storage: DataStorageService) {
-
-  }
+  constructor(private authService: AuthService, private storage: DataStorageService, private image: ImagesService) {}
 
   ngOnInit() {
-    
   }
-
-
-  // MEMORY LEAK, TODO
-
-  // onLogin() {
-  //   if(this.authService.loginSuccess) {
-  //       setTimeout(() => {
-  //         this.loginMessage = false;
-  //       }, 1500);
-  //       return this.loginMessage;
-  //   }
-  // }
-
-  // onLogout() {
-  //   if(this.authService.logoutSuccess) {
-  //     setTimeout(() => {
-  //       this.logoutMessage = false;
-  //     }, 1500);
-  //     return this.logoutMessage;
-  //   }
-  // }
 
 }

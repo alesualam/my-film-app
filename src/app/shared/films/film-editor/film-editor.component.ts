@@ -5,6 +5,7 @@ import { Film } from '../film.model';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { scoreRequired } from './film-valid.directive';
+import { ImagesService } from '../../images.service';
 
 @Component({
   selector: 'app-film-editor',
@@ -14,9 +15,12 @@ import { scoreRequired } from './film-valid.directive';
 export class FilmEditorComponent implements OnInit {
 
   subscription: Subscription;
+  imageSubscription: Subscription;
   filmForm: FormGroup;
   editedFilm: Film;
-  constructor(private filmService: FilmService) { }
+  imageUrl = '';
+  imageIndex = 0;
+  constructor(private filmService: FilmService, private image: ImagesService) { }
 
 
   ngOnInit() {
@@ -28,6 +32,10 @@ export class FilmEditorComponent implements OnInit {
       'score': new FormControl(null),
       'fav': new FormControl(false)
     }, {validators: scoreRequired});
+
+    this.imageSubscription = this.image.imageUrlObservable.subscribe(value => {
+      this.imageUrl = value;
+    })
 
     if(this.filmService.editMode) {
       this.subscription = this.filmService.startedEditing.subscribe(
@@ -89,5 +97,14 @@ export class FilmEditorComponent implements OnInit {
 
   onClear() {
     this.filmForm.reset();
+  }
+
+  onImage() {
+    if(this.imageIndex < 10) {
+      this.imageIndex++;
+    } else {
+      this.imageIndex = 0;
+    }
+    this.image.getImage(this.filmForm.get('title')['value'] + ' film poster', this.imageIndex);
   }
 }
