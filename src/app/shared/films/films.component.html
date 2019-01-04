@@ -3,7 +3,7 @@
       <div class="col-xs-10 col-md-6 list-group">
         <br><br>
         <div class="btn-group btn-group-sm" role="group" aria-label="Filters">
-            <button type="button" class="btn btn-success" [routerLink]="[new]" (click)="onEdit()">+Add ({{ filmService.filterStatus }})</button>
+            <button type="button" class="btn btn-success" (click)="onEdit()">+Add ({{ filmService.filterStatus }})</button>
             <button type="button" class="btn btn-secondary" (click)="onFilter('')"
             [ngClass]="filmService.filterStatus == '' ? 'active' : ''">All</button>
             <button type="button" class="btn btn-secondary" (click)="onFilter('Favorite')"

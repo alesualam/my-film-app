@@ -68,4 +68,10 @@ export class HeaderComponent implements OnInit {
       }
     );
   }
+
+  onHome() {
+    this.filmService.editMode = false;
+    this.filmService.createMode = false;
+    this.filmService.filterStatus = '';
+  }
 }
