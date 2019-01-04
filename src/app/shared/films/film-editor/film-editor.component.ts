@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FilmService } from '../films.service';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { Film } from '../film.model';
@@ -21,7 +21,6 @@ export class FilmEditorComponent implements OnInit {
   imageUrl = '';
   imageIndex = 0;
   constructor(private filmService: FilmService, private image: ImagesService) { }
-
 
   ngOnInit() {
     this.filmForm = new FormGroup({

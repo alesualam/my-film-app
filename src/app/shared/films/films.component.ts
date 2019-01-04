@@ -4,6 +4,7 @@ import { Film } from './film.model';
 import { Subscription } from 'rxjs';
 import { SimpleSmoothScrollService } from 'ng2-simple-smooth-scroll';
 import { DataStorageService } from '../data-storage.service';
+import { ImagesService } from '../images.service';
 
 @Component({
   selector: 'app-films',
@@ -16,7 +17,8 @@ export class FilmsComponent implements OnInit, OnDestroy {
   p: number = 1;
   private subscription: Subscription;
 
-  constructor(private filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService) { }
+  constructor(private filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService,
+    private image: ImagesService) { }
 
   ngOnInit() {
     this.storage.getFilms();
@@ -35,6 +37,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
   }
 
   onEdit(film: Film = null) {
+    this.image.imageUrlObservable.next('');
     if (film !== null) {
       this.filmService.editMode = true;
       this.filmService.createMode = false;
