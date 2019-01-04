@@ -22,6 +22,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from "./shared/auth.interceptor";
 import { NotificationsComponent } from './core/notifications/notifications.component';
 
+import {NgxPaginationModule} from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +43,8 @@ import { NotificationsComponent } from './core/notifications/notifications.compo
     FormsModule,
     ReactiveFormsModule,
     SimpleSmoothScrollModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [AuthService, FilmService, DataStorageService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},],
   bootstrap: [AppComponent]

@@ -18,7 +18,10 @@
         <ul class="list-group">
             <li class="list-group-item {{ film.status }} fav-{{ film.fav }}" style="cursor: pointer;" (click)="onEdit(film)"
             SimpleSmoothScroll [scrollTo]="'editor'" [duration]="250"
-            *ngFor="let film of films | filter:filmService.filterStatus:'satus'; let i = index">
+            *ngFor="let film of films 
+            | filter:filmService.filterStatus:'satus'
+            | paginate: { itemsPerPage: 5, currentPage: p} 
+            ; let i = index">
               <strong>{{ film.title }}</strong>
               <span class="score" [ngClass]="film.score <= 4 ? 'low-score' : film.score <= 7 ? 'mid-score' : 'high-score'" *ngIf="film.score">
               ({{ film.score }})
@@ -26,6 +29,8 @@
               <button class="btn-sm btn-primary float-right" (click)="onDelete(film)">X</button>
             </li>
         </ul>
+        <hr>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
       </div>
       <div class="col-xs-10 col-md-6 list-group">

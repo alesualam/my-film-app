@@ -13,6 +13,7 @@ import { DataStorageService } from '../data-storage.service';
 export class FilmsComponent implements OnInit, OnDestroy {
 
   films: Film[];
+  p: number = 1;
   private subscription: Subscription;
 
   constructor(private filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService) { }
