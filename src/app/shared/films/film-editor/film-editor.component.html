@@ -1,6 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+        <img src="{{ imageUrl }}" class="img-thumbnail mb-3 mr-sm-2" style="height: 15%;" *ngIf="imageUrl">
+        <br>
         <form class="form" [formGroup]="filmForm" (ngSubmit)="onSubmit()">
 
             <div class="input-group mb-3 mr-sm-2">
@@ -25,6 +27,13 @@
                 </div>
                 <input type="text" class="form-control" id="desc" formControlName="desc">
             </div>
+
+            <div class="input-group mb-3 mr-sm-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text" style="cursor: pointer;" (click)="onImage()">Image (Click to Search)</div>
+              </div>
+              <input type="text" class="form-control" id="image" formControlName="image">
+          </div>
 
             <div class="form-inline">
             <div class="input-group mb-3 mr-sm-2" *ngIf="!(filmForm.value.status !== 'Finished')">
@@ -63,8 +72,6 @@
             </div>
           </div>
           </form>
-          <img src="{{ imageUrl }}">
-          <button type="button" class="btn btn-secondary" (click)="onImage()">Get Image</button>
     </div>
   </div>
 </div>

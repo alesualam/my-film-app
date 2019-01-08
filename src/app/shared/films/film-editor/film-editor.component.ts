@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FilmService } from '../films.service';
-import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Film } from '../film.model';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
 import { scoreRequired } from './film-valid.directive';
 import { ImagesService } from '../../images.service';
 
@@ -19,6 +18,7 @@ export class FilmEditorComponent implements OnInit {
   filmForm: FormGroup;
   editedFilm: Film;
   imageUrl = '';
+  imageArray = [];
   imageIndex = 0;
   constructor(private filmService: FilmService, private image: ImagesService) { }
 
@@ -29,32 +29,40 @@ export class FilmEditorComponent implements OnInit {
       'status': new FormControl(null, [Validators.required]),
       'date': new FormControl(null),
       'score': new FormControl(null),
-      'fav': new FormControl(false)
+      'fav': new FormControl(false),
+      'image': new FormControl(null),
     }, {validators: scoreRequired});
 
     this.imageSubscription = this.image.imageUrlObservable.subscribe(value => {
-      this.imageUrl = value;
+      this.imageArray = value;
+      this.imageUrl = this.imageArray[this.imageIndex]['link'];
     })
 
     if(this.filmService.editMode) {
       this.subscription = this.filmService.startedEditing.subscribe(
         (index: number) => {
           this.editedFilm = this.filmService.getFilm(this.filmService.editedFilmIndex);
+          this.imageArray = [];
+          this.imageUrl = '';
+          this.imageIndex = 0;
+          this.imageUrl = this.editedFilm.image;
           if(this.editedFilm.status !== 'To-Watch') {
-            this.filmForm.setValue({
+            this.filmForm.patchValue({
               title: this.editedFilm.title,
               desc: this.editedFilm.desc,
               status: this.editedFilm.status,
               date: this.editedFilm.date,
               score: this.editedFilm.score,
-              fav: this.editedFilm.fav
+              fav: this.editedFilm.fav,
+              image: this.editedFilm.image,
             });
           } else {
             this.filmForm.patchValue({
               title: this.editedFilm.title,
               desc: this.editedFilm.desc,
-              status: this.editedFilm.status
-            })
+              status: this.editedFilm.status,
+              image: this.editedFilm.image,
+            });
           }
         }
       )
@@ -71,7 +79,7 @@ export class FilmEditorComponent implements OnInit {
 
   onSubmit() {
     const filmValues = this.filmForm.value;
-    const newFilm = new Film(filmValues.title, filmValues.desc, filmValues.status, filmValues.date, filmValues.score, filmValues.fav);
+    const newFilm = new Film(filmValues.title, filmValues.desc, filmValues.status, filmValues.date, filmValues.score, filmValues.fav, filmValues.image);
 
     if (this.filmService.editMode) {
       if (newFilm.status === 'To-Watch') {
@@ -99,11 +107,20 @@ export class FilmEditorComponent implements OnInit {
   }
 
   onImage() {
-    if(this.imageIndex < 10) {
-      this.imageIndex++;
+    if(this.imageArray.length == 0) {
+      this.image.getImage(this.filmForm.get('title')['value'] + ' film poster');
     } else {
-      this.imageIndex = 0;
+      if(this.imageIndex < 10) {
+        this.imageIndex++;
+        this.imageUrl = this.imageArray[this.imageIndex]['link'];
+        console.log(this.imageUrl);
+        this.filmForm.patchValue({
+          image: this.imageUrl,
+        });
+      } else {
+        this.imageIndex = 0;
+      }
     }
-    this.image.getImage(this.filmForm.get('title')['value'] + ' film poster', this.imageIndex);
   }
+
 }

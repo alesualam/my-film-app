@@ -9,13 +9,14 @@ export class ImagesService {
     API_KEY = 'key=AIzaSyBXONWopocqNm7nzuYGaKzrtcUfwwrU6aQ';
     CSE = '&cx=001072997329821042011:l-ehbvqmkg0';
     type = '&searchType=image';
+    result;
     imageUrl = '';
 
-    imageUrlObservable = new Subject<string>();
+    imageUrlObservable = new Subject<any>();
 
     constructor(private httpClient: HttpClient) {}
 
-    getImage(query, i) {
+    getImage(query) {
 
         query = '&q=' + query.split(' ').join('+');
 
@@ -25,8 +26,9 @@ export class ImagesService {
         })
         .subscribe(
             (response) => {
-                this.imageUrl = response['items'][i]['link'];
-                this.imageUrlObservable.next(this.imageUrl);
+                this.result = response['items'];
+                console.log(this.result);
+                this.imageUrlObservable.next(this.result);
             }
         )
     }

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-      <div class="col-xs-10 col-md-6 list-group">
+      <div class="col-xs-10 col-md-7 list-group">
         <br><br>
         <div class="btn-group btn-group-sm" role="group" aria-label="Filters">
             <button type="button" class="btn btn-success" (click)="onEdit()">+Add ({{ filmService.filterStatus }})</button>
@@ -15,26 +15,39 @@
         </div>
         <br>
 
-        <ul class="list-group">
-            <li class="list-group-item {{ film.status }} fav-{{ film.fav }}" style="cursor: pointer;" (click)="onEdit(film)"
+        <div class="cards">
+            <div class="card {{ film.status }} fav-{{ film.fav }} mb-2" 
+            style="cursor: pointer; width: 45%; height: 20%;float: left" (click)="onEdit(film)"
             SimpleSmoothScroll [scrollTo]="'editor'" [duration]="250"
             *ngFor="let film of films 
             | filter:filmService.filterStatus:'satus'
-            | paginate: { itemsPerPage: 5, currentPage: p} 
+            | paginate: { itemsPerPage: 6, currentPage: p} 
             ; let i = index">
-              <strong>{{ film.title }}</strong>
-              <span class="score" [ngClass]="film.score <= 4 ? 'low-score' : film.score <= 7 ? 'mid-score' : 'high-score'" *ngIf="film.score">
-              ({{ film.score }})
-              </span>
-              <button class="btn-sm btn-primary float-right" (click)="onDelete(film)">X</button>
-            </li>
-        </ul>
+
+              <figure>
+                <img class="card-image" src="{{ film.image }}" *ngIf="film.image">
+              </figure>
+
+              <div class="row ml-1">
+                <div class="col-md-9">
+                  <h4 class="card-title float-left">{{ film.title }}</h4>
+                </div>
+                <div class="col-md-3">
+                  <h4 class="card-title float-left" [ngClass]="film.score <= 4 ? 'low-score' : film.score <= 7 ? 'mid-score' : 'high-score'" *ngIf="film.score">
+                  {{ film.score }}
+                  </h4>
+                </div>
+              </div>
+              <!-- <button class="btn-sm btn-primary float-right" style="width: 15%" (click)="onDelete(film)">X</button> -->
+            </div>
+          </div>
+
         <hr>
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
       </div>
-      <div class="col-xs-10 col-md-6 list-group">
-        <hr><br><br><br>
+      <div class="col-xs-10 col-md-5 list-group">
+        <hr><br><br>
           <app-film-editor *ngIf="filmService.editMode" id="editor"></app-film-editor>
           <app-film-editor *ngIf="filmService.createMode" id="editor"></app-film-editor>
       </div>

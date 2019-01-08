@@ -37,7 +37,6 @@ export class FilmsComponent implements OnInit, OnDestroy {
   }
 
   onEdit(film: Film = null) {
-    this.image.imageUrlObservable.next('');
     if (film !== null) {
       this.filmService.editMode = true;
       this.filmService.createMode = false;
