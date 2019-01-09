@@ -19,7 +19,7 @@
         <div class="cards">
             <div class="card {{ film.status }} fav-{{ film.fav }} mb-2 mr-2" 
             style="cursor: pointer; height: 20%;float: left" 
-            [ngStyle]="{'width': (filmService.editMode || filmService.createMode) ? '45%' : '20%' }"
+            [ngStyle]="{'width': (filmService.editMode || filmService.createMode) ? '45%' : '24%' }"
             (click)="onEdit(film, i)"
             SimpleSmoothScroll [scrollTo]="'editor'" [duration]="250"
             *ngFor="let film of films 
@@ -47,7 +47,9 @@
           </div>
 
         <hr>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <div class="pagn" style="width:100%; text-align: center;">
+          <pagination-controls (pageChange)="p = $event" style="display: inline-block"></pagination-controls>
+        </div>
 
       </div>
       <div class="col-xs-10 col-md-5 list-group">

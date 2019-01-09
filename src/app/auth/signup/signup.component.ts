@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { passwordEquals } from './signup-valid.directive';
 
 @Component({
   selector: 'app-signup',
@@ -15,8 +16,9 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.signupForm = new FormGroup({
       'email': new FormControl(null, [Validators.required]),
-      'password': new FormControl(null, [Validators.required])
-    });
+      'password': new FormControl(null, [Validators.required]),
+      'rpassword': new FormControl(null, [Validators.required])
+    }, {validators: passwordEquals});
   }
 
   onSignup(form: NgForm) {
