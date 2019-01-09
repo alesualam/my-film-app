@@ -18,7 +18,6 @@ export class FilmService {
     ]
 
     private films: Film[] = [
-
     ];
 
   getFilms() {
@@ -64,11 +63,26 @@ export class FilmService {
     this.films = Array.prototype.concat(myfavfilms, myfinishedfilms, mytowatchfilms);
   }
 
+  orderFilmsbyDate() {
+    const myfilms = this.films;
+    this.films = myfilms.sort(this.sortbydate);
+  }
+
   sortbyname(a,b) {
     if(a.title > b.title) {
       return 1;
     }
     if(a.title < b.title) {
+      return -1;
+    }
+    return 0;
+  }
+
+  sortbydate(a,b) {
+    if(a.date > b.date) {
+      return 1;
+    }
+    if(a.date < b.date) {
       return -1;
     }
     return 0;

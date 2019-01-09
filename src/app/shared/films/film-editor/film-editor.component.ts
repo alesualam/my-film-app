@@ -70,10 +70,19 @@ export class FilmEditorComponent implements OnInit {
       } else {
         const patched_status = this.filmService.filterStatus === 'Favorite' ? 'Finished' : this.filmService.filterStatus;
         const patched_fav = this.filmService.filterStatus === 'Favorite' ? true : false;
+        const patched_date = new Date().toLocaleDateString().split('/');
+        const year = patched_date[2];
+        const month = patched_date[1];
+        const day = patched_date[0];
+        const new_date = [year, day, month].join('-');
+        console.log(patched_date);
+        // 2018-10-12
+        // TODO
         this.filmForm.patchValue({
           status: patched_status,
-          fav: patched_fav
-        })
+          fav: patched_fav,
+          date: patched_date,
+        });
       }
   }
 

@@ -51,8 +51,6 @@ export class FilmsComponent implements OnInit, OnDestroy {
 
   onEdit(film: Film = null, i) {
 
-    console.log(this.filmService.getFilms().indexOf(film));
-    console.log(i);
     this.filmService.isEditing.next(true);
 
     if (film !== null) {
