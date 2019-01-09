@@ -100,6 +100,7 @@ export class FilmEditorComponent implements OnInit {
   onCancel() {
     this.filmService.editMode = false;
     this.filmService.createMode = false;
+    this.filmService.isEditing.next(false);
   }
 
   onClear() {
@@ -107,8 +108,10 @@ export class FilmEditorComponent implements OnInit {
   }
 
   onImage() {
+    let query = this.filmForm.get('title')['value'] + ' film poster';
+
     if(this.imageArray.length == 0) {
-      this.image.getImage(this.filmForm.get('title')['value'] + ' film poster');
+      this.image.getImage(query);
     } else {
       if(this.imageIndex < 10) {
         this.imageIndex++;
@@ -123,4 +126,15 @@ export class FilmEditorComponent implements OnInit {
     }
   }
 
+  onDelete() {
+    let deleteFlag = false;
+    deleteFlag = confirm("Are you sure?");
+
+    if(deleteFlag) {
+      this.filmService.isEditing.next(false);
+      this.filmService.deleteFilm(this.filmService.getFilms().indexOf(this.editedFilm));
+      this.filmService.editMode = false;
+      this.filmService.createMode = false;
+    }
+  }
 }

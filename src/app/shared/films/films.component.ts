@@ -13,9 +13,13 @@ import { ImagesService } from '../images.service';
 })
 export class FilmsComponent implements OnInit, OnDestroy {
 
+  cardContainerSize = 'col-md-12';
+  nItems = 12;
+
   films: Film[];
   p: number = 1;
   private subscription: Subscription;
+  private editSub: Subscription;
 
   constructor(private filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService,
     private image: ImagesService) { }
@@ -29,6 +33,15 @@ export class FilmsComponent implements OnInit, OnDestroy {
           this.films = films;
         }
       );
+    this.editSub = this.filmService.isEditing.subscribe((value) => {
+      if(value) {
+        this.cardContainerSize = 'row-md-7';
+        this.nItems = 6;
+      } else {
+        this.cardContainerSize = 'row-md-12';
+        this.nItems = 12;
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -36,7 +49,12 @@ export class FilmsComponent implements OnInit, OnDestroy {
     this.filmService.setFilms([]);
   }
 
-  onEdit(film: Film = null) {
+  onEdit(film: Film = null, i) {
+
+    console.log(this.filmService.getFilms().indexOf(film));
+    console.log(i);
+    this.filmService.isEditing.next(true);
+
     if (film !== null) {
       this.filmService.editMode = true;
       this.filmService.createMode = false;

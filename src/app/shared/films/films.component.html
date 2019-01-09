@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
-      <div class="col-xs-10 col-md-7 list-group">
+      <div class="col-xs-10 list-group"
+      [class.col-md-7]="(filmService.editMode || filmService.createMode)">
         <br><br>
         <div class="btn-group btn-group-sm" role="group" aria-label="Filters">
             <button type="button" class="btn btn-success" (click)="onEdit()">+Add ({{ filmService.filterStatus }})</button>
@@ -16,29 +17,32 @@
         <br>
 
         <div class="cards">
-            <div class="card {{ film.status }} fav-{{ film.fav }} mb-2" 
-            style="cursor: pointer; width: 45%; height: 20%;float: left" (click)="onEdit(film)"
+            <div class="card {{ film.status }} fav-{{ film.fav }} mb-2 mr-2" 
+            style="cursor: pointer; height: 20%;float: left" 
+            [ngStyle]="{'width': (filmService.editMode || filmService.createMode) ? '45%' : '20%' }"
+            (click)="onEdit(film, i)"
             SimpleSmoothScroll [scrollTo]="'editor'" [duration]="250"
             *ngFor="let film of films 
             | filter:filmService.filterStatus:'satus'
-            | paginate: { itemsPerPage: 6, currentPage: p} 
+            | paginate: { itemsPerPage: nItems, currentPage: p }
             ; let i = index">
 
-              <figure>
-                <img class="card-image" src="{{ film.image }}" *ngIf="film.image">
-              </figure>
+              <div class="img-card-container">
+                <figure>
+                  <img class="card-image" src="{{ film.image }}" *ngIf="film.image">
+                </figure>
+              </div>
 
-              <div class="row ml-1">
-                <div class="col-md-9">
-                  <h4 class="card-title float-left">{{ film.title }}</h4>
+              <div class="row ml-1 mt-2">
+                <div class="film-title col-md-9">
+                  <p class="card-title float-left">{{ film.title }}</p>
                 </div>
-                <div class="col-md-3">
-                  <h4 class="card-title float-left" [ngClass]="film.score <= 4 ? 'low-score' : film.score <= 7 ? 'mid-score' : 'high-score'" *ngIf="film.score">
+                <div class="film-score col-md-2 mr-1">
+                  <p class="card-title float-left" [ngClass]="film.score <= 4 ? 'low-score' : film.score <= 7 ? 'mid-score' : 'high-score'" *ngIf="film.score">
                   {{ film.score }}
-                  </h4>
+                  </p>
                 </div>
               </div>
-              <!-- <button class="btn-sm btn-primary float-right" style="width: 15%" (click)="onDelete(film)">X</button> -->
             </div>
           </div>
 

@@ -19,15 +19,13 @@
     color: green;
 }
 
-figure{
-    width:100%; /*container-width*/
-    overflow:hidden; /*hide bounds of image */
-       /*reset margin of figure tag*/
- }
+.img-card-container {
+    height: 15vh;
+}
 
- figure img{
-    display:block; /*remove inline-block spaces*/
-    width:100%; /*make image streatch*/
-    margin:-50% 0;
-    opacity: 0.5;
- }
+img {
+    object-fit: cover;
+    width: 100%;
+    height: 15vh;
+    opacity: 0.2;
+}

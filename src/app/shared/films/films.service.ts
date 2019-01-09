@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 export class FilmService {
     filmsChanged = new Subject<Film[]>();
     startedEditing = new Subject<number>();
+    isEditing = new Subject<boolean>();
     editMode = false;
     createMode = false;
     editedFilmIndex: number;
@@ -22,7 +23,6 @@ export class FilmService {
 
   getFilms() {
     this.orderFilms();
-
     return this.films.slice();
   }
 

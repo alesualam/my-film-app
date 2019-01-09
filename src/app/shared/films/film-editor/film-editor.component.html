@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-        <img src="{{ imageUrl }}" class="img-thumbnail mb-3 mr-sm-2" style="height: 15%;" *ngIf="imageUrl">
+        <img src="{{ imageUrl }}" class="img-thumbnail mb-3 mr-sm-2" style="height: 30vh;" *ngIf="imageUrl">
         <br>
         <form class="form" [formGroup]="filmForm" (ngSubmit)="onSubmit()">
 
@@ -69,6 +69,7 @@
               <button type="button" class="btn btn-success mb-2" [disabled]="!filmForm.valid" (click)="onSubmit()">Save</button>
               <button type="button" class="btn btn-secondary mb-2" (click)="onClear()">Clear</button>
               <button type="button" class="btn btn-primary mb-2" (click)="onCancel()">Cancel</button>
+              <button type="button" class="btn btn-danger mb-2" (click)="onDelete()">Delete</button>
             </div>
           </div>
           </form>
