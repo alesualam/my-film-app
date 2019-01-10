@@ -36,6 +36,10 @@ export class FilmEditorComponent implements OnInit {
     this.imageSubscription = this.image.imageUrlObservable.subscribe(value => {
       this.imageArray = value;
       this.imageUrl = this.imageArray[this.imageIndex]['link'];
+
+      this.filmForm.patchValue({
+        image: this.imageUrl
+      });
     })
 
     if(this.filmService.editMode) {
@@ -70,14 +74,8 @@ export class FilmEditorComponent implements OnInit {
       } else {
         const patched_status = this.filmService.filterStatus === 'Favorite' ? 'Finished' : this.filmService.filterStatus;
         const patched_fav = this.filmService.filterStatus === 'Favorite' ? true : false;
-        const patched_date = new Date().toLocaleDateString().split('/');
-        const year = patched_date[2];
-        const month = patched_date[1];
-        const day = patched_date[0];
-        const new_date = [year, day, month].join('-');
-        console.log(patched_date);
-        // 2018-10-12
-        // TODO
+        const patched_date = new Date().toISOString().split("T")[0];
+
         this.filmForm.patchValue({
           status: patched_status,
           fav: patched_fav,
@@ -89,6 +87,7 @@ export class FilmEditorComponent implements OnInit {
   onSubmit() {
     const filmValues = this.filmForm.value;
     const newFilm = new Film(filmValues.title, filmValues.desc, filmValues.status, filmValues.date, filmValues.score, filmValues.fav, filmValues.image);
+    console.log(newFilm.date, typeof(newFilm.date));
 
     if (this.filmService.editMode) {
       if (newFilm.status === 'To-Watch') {
@@ -116,6 +115,7 @@ export class FilmEditorComponent implements OnInit {
     this.filmForm.reset();
   }
 
+  // BUG (No parchea el campo image)
   onImage() {
     let query = this.filmForm.get('title')['value'] + ' film poster';
 

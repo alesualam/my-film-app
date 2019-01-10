@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FilmService } from './films.service';
 import { Film } from './film.model';
 import { Subscription } from 'rxjs';
@@ -20,11 +20,13 @@ export class FilmsComponent implements OnInit, OnDestroy {
   p: number = 1;
   private subscription: Subscription;
   private editSub: Subscription;
+  @Output() pageChange: EventEmitter<number>;
 
   constructor(private filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService,
     private image: ImagesService) { }
 
   ngOnInit() {
+
     this.storage.getFilms();
     this.films = this.filmService.getFilms();
     this.subscription = this.filmService.filmsChanged
@@ -46,12 +48,14 @@ export class FilmsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.editSub.unsubscribe();
     this.filmService.setFilms([]);
   }
 
-  onEdit(film: Film = null, i) {
+  onEdit(film: Film = null, i: number) {
 
     this.filmService.isEditing.next(true);
+    this.p = Math.ceil((i+1)/6);
 
     if (film !== null) {
       this.filmService.editMode = true;
@@ -75,5 +79,6 @@ export class FilmsComponent implements OnInit, OnDestroy {
     this.filmService.filterStatus = filter;
     this.filmService.editMode = false;
     this.filmService.createMode = false;
+    this.filmService.isEditing.next(false);
   }
 }
