@@ -15,12 +15,11 @@ export class FilmsComponent implements OnInit, OnDestroy {
 
   cardContainerSize = 'col-md-12';
   nItems = 12;
-
   films: Film[];
+  uniqueYears: string[];
   p: number = 1;
   private subscription: Subscription;
   private editSub: Subscription;
-  @Output() pageChange: EventEmitter<number>;
 
   constructor(private filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService,
     private image: ImagesService) { }
@@ -33,6 +32,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
       .subscribe(
         (films: Film[]) => {
           this.films = films;
+          this.uniqueYears = this.filmService.uniqueYears;
         }
       );
     this.editSub = this.filmService.isEditing.subscribe((value) => {
@@ -80,5 +80,10 @@ export class FilmsComponent implements OnInit, OnDestroy {
     this.filmService.editMode = false;
     this.filmService.createMode = false;
     this.filmService.isEditing.next(false);
+  }
+
+  onOrder(method: string) {
+    this.filmService.orderStatus = method;
+    this.filmService.orderby();
   }
 }

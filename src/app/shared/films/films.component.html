@@ -15,10 +15,29 @@
             [ngClass]="filmService.filterStatus == 'Finished' ? 'active' : ''">Finished</button>
             <button type="button" class="btn btn-secondary" (click)="onFilter('To-Watch')"
             [ngClass]="filmService.filterStatus == 'To-Watch' ? 'active' : ''">To-Watch</button>
+
+            <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  Dropdown button
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Link 1</a>
+                  <a class="dropdown-item" href="#">Link 2</a>
+                  <a class="dropdown-item" href="#">Link 3</a>
+                </div>
+              </div>
+
+        </div>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Order">
+          <button type="button" class="btn btn-secondary" (click)="onOrder('')"
+          [ngClass]="filmService.orderStatus == '' ? 'active' : ''">Default</button>
+          <button type="button" class="btn btn-secondary" (click)="onOrder('title')"
+          [ngClass]="filmService.orderStatus == 'title' ? 'active' : ''">Title</button>
+          <button type="button" class="btn btn-secondary" (click)="onOrder('date')"
+          [ngClass]="filmService.orderStatus == 'date' ? 'active' : ''">Latest</button>
         </div>
         <br>
 
-        <!-- TODO: Card width falla cuando no existe imagen -->
         <div class="cards">
             <div class="card {{ film.status }} fav-{{ film.fav }} mb-2 mr-2" 
             style="cursor: pointer; height: 20%;float: left" 
