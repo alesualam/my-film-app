@@ -1,14 +1,25 @@
 <div class="container">
     <div class="row align-items-center">
         <div class="col-xs-12 col-sm-12 col-md-12 mx-auto">
-            <h2 class="mt-5">Welcome to the App!</h2>
+            <h2 class="mt-5">Welcome to FilmApp!</h2>
             <hr>
             <ng-template [ngIf]="!getToken()">  
                 <p>Please <a routerLink="/signin">sign in</a> or <a routerLink="/signup">create an account</a> to start working.</p>
             </ng-template>
             <ng-template [ngIf]="getToken()">
-                <p>Select an option to start working with <strong>FilmApp</strong></p>
+                <div class="instructions">
+                    <h4>How FilmApp works:</h4>
+                    <br>
+                    <ul>
+                        <li>1. Create any film you have watched or plan to watch.</li>
+                        <li>2. Set its details. </li>
+                        <li>3. Save & Edit your data. </li>
+                    </ul>
+                    <p>Go to <a routerLink="/films">My Films</a> to start working.</p>
+                </div>
+                <hr>
             </ng-template>
+            <br>
         </div>
     </div>
 </div>
