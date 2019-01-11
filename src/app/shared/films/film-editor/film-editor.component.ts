@@ -87,7 +87,6 @@ export class FilmEditorComponent implements OnInit {
   onSubmit() {
     const filmValues = this.filmForm.value;
     const newFilm = new Film(filmValues.title, filmValues.desc, filmValues.status, filmValues.date, filmValues.score, filmValues.fav, filmValues.image);
-    console.log(newFilm.date, typeof(newFilm.date));
 
     if (this.filmService.editMode) {
       if (newFilm.status === 'To-Watch') {
@@ -103,6 +102,8 @@ export class FilmEditorComponent implements OnInit {
       this.filmService.addFilm(newFilm);
       this.filmService.createMode = false;
     }
+
+    this.filmService.isEditing.next(false);
   }
 
   onCancel() {
@@ -115,7 +116,6 @@ export class FilmEditorComponent implements OnInit {
     this.filmForm.reset();
   }
 
-  // BUG (No parchea el campo image)
   onImage() {
     let query = this.filmForm.get('title')['value'] + ' film poster';
 
@@ -125,7 +125,6 @@ export class FilmEditorComponent implements OnInit {
       if(this.imageIndex < 10) {
         this.imageIndex++;
         this.imageUrl = this.imageArray[this.imageIndex]['link'];
-        console.log(this.imageUrl);
         this.filmForm.patchValue({
           image: this.imageUrl,
         });

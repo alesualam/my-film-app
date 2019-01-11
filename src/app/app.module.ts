@@ -22,7 +22,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from "./shared/auth.interceptor";
 import { NotificationsComponent } from './core/notifications/notifications.component';
 
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImagesService } from './shared/images.service';
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ImagesService } from './shared/images.service';
     SimpleSmoothScrollModule,
     HttpClientModule,
     NgxPaginationModule,
+    NgbModule
   ],
   providers: [AuthService, FilmService, DataStorageService, 
     ImagesService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},],

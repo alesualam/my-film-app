@@ -11,10 +11,11 @@ export class FilmService {
   createMode = false;
   editedFilmIndex: number;
   currentFilm: Film;
+
   filterStatus = '';
   orderStatus = '';
-
   uniqueYears = [];
+  currentYear = '';
 
   unsavedData = false;
   scores = Array.from(Array(11).keys()).reverse();
@@ -65,20 +66,6 @@ export class FilmService {
 
     this.filmsChanged.next(this.films.slice());
   }
-
-  //
-  // ELIMINAR SI VA BIEN CON EL NUEVO MÉTODO
-  //
-  // orderFilms() {
-  //   const myfilms = this.films;
-  //   const myfavfilms = myfilms.filter(film => film.fav === true).sort(this.sortbyname);
-  //   const myfinishedfilms = myfilms.filter(film => (film.fav === false && film.status === 'Finished')).sort(this.sortbyname);
-  //   const mytowatchfilms = myfilms.filter(film => film.status === 'To-Watch').sort(this.sortbyname);
-
-  //   this.films = Array.prototype.concat(myfavfilms, myfinishedfilms, mytowatchfilms);
-  //   this.filmsChanged.next(this.films.slice());
-  // }
-  //
 
   orderby() {
     if(this.orderStatus === 'title') {

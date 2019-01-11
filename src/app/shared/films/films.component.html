@@ -16,16 +16,15 @@
             <button type="button" class="btn btn-secondary" (click)="onFilter('To-Watch')"
             [ngClass]="filmService.filterStatus == 'To-Watch' ? 'active' : ''">To-Watch</button>
 
-            <div class="dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                  Dropdown button
-                </button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Link 1</a>
-                  <a class="dropdown-item" href="#">Link 2</a>
-                  <a class="dropdown-item" href="#">Link 3</a>
-                </div>
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Year: {{ filmService.currentYear }}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="dropdown-item" (click)="onYearFilter('')">All</button>
+                <button class="dropdown-item"
+                *ngFor="let year of uniqueYears"
+                (click)="onYearFilter(year)">{{ year }}</button>
               </div>
+            </div>
 
         </div>
         <div class="btn-group btn-group-sm" role="group" aria-label="Order">
@@ -45,7 +44,7 @@
             (click)="onEdit(film, i)"
             SimpleSmoothScroll [scrollTo]="'editor'" [duration]="250"
             *ngFor="let film of films 
-            | filter: filmService.filterStatus:'satus'
+            | filter: filmService.filterStatus:filmService.currentYear
             | paginate: { itemsPerPage: nItems, currentPage: p }
             ; let i = index">
 

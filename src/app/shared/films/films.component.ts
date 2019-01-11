@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FilmService } from './films.service';
 import { Film } from './film.model';
 import { Subscription } from 'rxjs';
@@ -33,6 +33,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
         (films: Film[]) => {
           this.films = films;
           this.uniqueYears = this.filmService.uniqueYears;
+          console.log(this.uniqueYears);
         }
       );
     this.editSub = this.filmService.isEditing.subscribe((value) => {
@@ -85,5 +86,10 @@ export class FilmsComponent implements OnInit, OnDestroy {
   onOrder(method: string) {
     this.filmService.orderStatus = method;
     this.filmService.orderby();
+  }
+
+  onYearFilter(year: string) {
+    this.filmService.currentYear = year;
+    // console.log("You selected: " + year);
   }
 }
