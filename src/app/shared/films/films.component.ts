@@ -33,7 +33,6 @@ export class FilmsComponent implements OnInit, OnDestroy {
         (films: Film[]) => {
           this.films = films;
           this.uniqueYears = this.filmService.uniqueYears;
-          console.log(this.uniqueYears);
         }
       );
     this.editSub = this.filmService.isEditing.subscribe((value) => {
@@ -90,6 +89,5 @@ export class FilmsComponent implements OnInit, OnDestroy {
 
   onYearFilter(year: string) {
     this.filmService.currentYear = year;
-    // console.log("You selected: " + year);
   }
 }

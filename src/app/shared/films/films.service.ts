@@ -68,9 +68,9 @@ export class FilmService {
   }
 
   orderby() {
-    if(this.orderStatus === 'title') {
+    if(this.orderStatus === 'Title') {
       this.films = this.films.sort(this.sortbyname);
-    } else if (this.orderStatus === 'date') {
+    } else if (this.orderStatus === 'Latest') {
       this.films = this.films.sort(this.sortbydate);
     } else {
       const myfilms = this.films;

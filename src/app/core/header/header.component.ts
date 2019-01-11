@@ -64,7 +64,6 @@ export class HeaderComponent implements OnInit {
         this.filmService.unsavedData = false;
         this.storage.saveSuccess = true;
         this.storage.saveObservable.next(this.storage.saveSuccess);
-        console.log(response);
       }
     );
   }

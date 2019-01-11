@@ -97,7 +97,10 @@ export class FilmEditorComponent implements OnInit {
       this.filmService.updateFilm(this.filmService.editedFilmIndex, newFilm);
       this.filmService.editMode = false;
     } else {
-      newFilm.date = newFilm.date === null ? new Date() : newFilm.date;
+      if(newFilm.status === 'To-Watch') {
+        newFilm.date = null;
+        newFilm.fav = null;
+      }
       newFilm.desc = newFilm.desc === null ? '' : newFilm.desc;
       this.filmService.addFilm(newFilm);
       this.filmService.createMode = false;
