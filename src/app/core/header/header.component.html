@@ -10,7 +10,7 @@
             <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
             (click)="onHome()">Home</a>
         </li>
-        <ng-template [ngIf]="authService.token">
+        <ng-template [ngIf]="getToken()">
         <li class="nav-item mr-2">
             <a class="nav-link" routerLink="/films" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">My Films</a>
         </li>

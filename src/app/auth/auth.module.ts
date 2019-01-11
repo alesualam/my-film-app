@@ -7,8 +7,6 @@ import { AuthRoutingModule } from "./auth-routing.module";
 
 @NgModule({
     declarations: [
-        SigninComponent,
-        SignupComponent,
     ],
     imports: [
         FormsModule,

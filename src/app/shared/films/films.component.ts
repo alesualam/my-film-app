@@ -21,7 +21,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private editSub: Subscription;
 
-  constructor(private filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService,
+  constructor(public filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService,
     private image: ImagesService) { }
 
   ngOnInit() {

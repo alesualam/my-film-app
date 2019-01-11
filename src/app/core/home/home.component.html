@@ -3,10 +3,10 @@
         <div class="col-xs-12 col-sm-12 col-md-12 mx-auto">
             <h2 class="mt-5">Welcome to the App!</h2>
             <hr>
-            <ng-template [ngIf]="!authService.token">  
+            <ng-template [ngIf]="!getToken()">  
                 <p>Please <a routerLink="/signin">sign in</a> or <a routerLink="/signup">create an account</a> to start working.</p>
             </ng-template>
-            <ng-template [ngIf]="authService.token">
+            <ng-template [ngIf]="getToken()">
                 <p>Select an option to start working with <strong>FilmApp</strong></p>
             </ng-template>
         </div>

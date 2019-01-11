@@ -11,7 +11,7 @@ import { passwordEquals } from './signup-valid.directive';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
     }, {validators: passwordEquals});
   }
 
-  onSignup(form: NgForm) {
+  onSignup() {
     const email = this.signupForm.value.email;
     const password = this.signupForm.value.password;
     this.authService.signupUser(email, password);

@@ -22,4 +22,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  getToken() {
+    return this.authService.token;
+  }
+
 }

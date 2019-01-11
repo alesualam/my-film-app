@@ -20,7 +20,7 @@ export class FilmEditorComponent implements OnInit {
   imageUrl = '';
   imageArray = [];
   imageIndex = 0;
-  constructor(private filmService: FilmService, private image: ImagesService) { }
+  constructor(public filmService: FilmService, private image: ImagesService) { }
 
   ngOnInit() {
     this.filmForm = new FormGroup({

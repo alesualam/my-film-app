@@ -73,4 +73,8 @@ export class HeaderComponent implements OnInit {
     this.filmService.createMode = false;
     this.filmService.filterStatus = '';
   }
+
+  getToken() {
+    return this.authService.token;
+  }
 }

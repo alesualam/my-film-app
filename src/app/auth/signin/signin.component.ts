@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
     this.signinForm = new FormGroup({
@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  onSignin(form: NgForm) {
+  onSignin() {
     const email = this.signinForm.value.email;
     const password = this.signinForm.value.password;
     this.authService.signinUser(email, password);
