@@ -1,12 +1,15 @@
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { UserService } from './user/user.service';
 
 @Injectable()
 export class AuthService {
     loginObservable = new Subject<boolean>();
     logoutObservable = new Subject<boolean>();
+
+    userSubscription: Subscription;
 
     createdAccountSuccess = false;
     loginSuccess = false;
@@ -16,7 +19,7 @@ export class AuthService {
     errorType = '';
     token: string;
 
-    constructor(private router: Router) {}
+    constructor(private router: Router, private userService: UserService) {}
 
     signupUser(email: string, password: string) {
         firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password).then(
@@ -39,6 +42,7 @@ export class AuthService {
                 this.loginSuccess = true;
                 this.loginObservable.next(this.loginSuccess);
                 this.logoutSuccess = false;
+
                 this.router.navigate(['/']);
                 firebase.auth().currentUser.getIdToken().then(
                     (token: string) => this.token = token

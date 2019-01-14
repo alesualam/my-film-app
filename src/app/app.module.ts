@@ -28,6 +28,7 @@ import { ImagesService } from './shared/images.service';
 import { UserComponent } from './auth/user/user.component';
 import { UserService } from './auth/user/user.service';
 import { StatsComponent } from './auth/user/stats/stats.component';
+import { StatsService } from './auth/user/stats/stats.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { StatsComponent } from './auth/user/stats/stats.component';
     NgbModule
   ],
   providers: [AuthService, FilmService, DataStorageService, 
-    ImagesService, UserService ,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},],
+    ImagesService, UserService, StatsService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

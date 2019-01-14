@@ -1,11 +1,7 @@
 <div class="container">
-  <div class="row">
-      <div class="col-xs-12 list-group"
-      [class.col-md-7]="(filmService.editMode || filmService.createMode)"
-      [class.col-md-12]="!(filmService.editMode || filmService.createMode)">
-      <br><br>
-
-        <div class="btn-toolbar" role="toolbar">
+  <div class="row mt-4">
+    <div class="col-md-5">
+      <div class="btn-toolbar" role="toolbar">
           <div class="btn-group btn-group-sm" role="group" aria-label="Filters">
               <button type="button" class="btn btn-success mr-1" (click)="onEdit(null, null)">+Add: {{ filmService.filterStatus }}</button>
           </div>
@@ -45,10 +41,19 @@
               (click)="onOrder('')"
               (click)="onYearFilter('')">Reset Filters</button>
           </div>
-
         </div>
+      </div>
+      <!-- <div class="col-md-6 ml-2 mt-2">
+        <p><ngb-progressbar type="{{ stats.objective_status }}" value="{{ stats.objective }}" [striped]="true" [animated]="true">
+            {{ stats.current_year }} of {{ userService.user.film_objective }}
+        </ngb-progressbar></p>
+      </div> -->
+  </div>
 
-        <br>
+  <div class="row mt-4">
+      <div class="col-xs-12 list-group"
+      [class.col-md-7]="(filmService.editMode || filmService.createMode)"
+      [class.col-md-12]="!(filmService.editMode || filmService.createMode)">
         <div class="cards">
             <div class="card {{ film.status }} fav-{{ film.fav }} mb-2 mr-2" 
             style="cursor: pointer; height: 20%;float: left" 
@@ -86,7 +91,6 @@
 
       </div>
       <div class="col-xs-10 col-md-5 list-group">
-        <hr><br><br>
           <app-film-editor *ngIf="filmService.editMode" id="editor"></app-film-editor>
           <app-film-editor *ngIf="filmService.createMode" id="editor"></app-film-editor>
       </div>

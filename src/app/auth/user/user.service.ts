@@ -5,6 +5,8 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class UserService {
     
+    constructor() {}
+
     userSubject = new Subject<User>();
     startedEditing = new Subject<boolean>();
     editMode = false;
@@ -15,8 +17,6 @@ export class UserService {
         'avatar': "",
         'film_objective': null,
     }
-
-    constructor() {}
 
     getUser() {
         return this.user;

@@ -5,6 +5,9 @@ import { Subscription } from 'rxjs';
 import { SimpleSmoothScrollService } from 'ng2-simple-smooth-scroll';
 import { DataStorageService } from '../data-storage.service';
 import { ImagesService } from '../images.service';
+import { StatsService } from 'src/app/auth/user/stats/stats.service';
+import { User } from 'src/app/auth/user/user.model';
+import { UserService } from 'src/app/auth/user/user.service';
 
 @Component({
   selector: 'app-films',
@@ -18,11 +21,17 @@ export class FilmsComponent implements OnInit, OnDestroy {
   films: Film[];
   uniqueYears: string[];
   p: number = 1;
+
+  stats;
+
+  user: User;
+
   private subscription: Subscription;
   private editSub: Subscription;
+  private userSubscription: Subscription;
 
   constructor(public filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService,
-    private image: ImagesService) { }
+    private image: ImagesService, private statsService: StatsService, private userService: UserService) { }
 
   ngOnInit() {
 
@@ -32,9 +41,18 @@ export class FilmsComponent implements OnInit, OnDestroy {
       .subscribe(
         (films: Film[]) => {
           this.films = films;
+          this.statsService.films = films;
           this.uniqueYears = this.filmService.uniqueYears;
         }
       );
+
+    // this.storage.getUser();
+    // this.userSubscription = this.userService.userSubject.subscribe((user: User) => {
+    //   this.statsService.user = user;
+    //   this.stats = this.statsService.getStats();
+    //   console.log(this.stats);
+    // });
+
     this.editSub = this.filmService.isEditing.subscribe((value) => {
       if(value) {
         this.cardContainerSize = 'row-md-7';
