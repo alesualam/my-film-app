@@ -3,11 +3,14 @@ import { SigninComponent } from "./signin/signin.component";
 import { SignupComponent } from "./signup/signup.component";
 import { FormsModule } from "@angular/forms";
 import { AuthRoutingModule } from "./auth-routing.module";
+import { UserComponent } from './user/user.component';
+import { StatsComponent } from './user/stats/stats.component';
 
 
 @NgModule({
     declarations: [
-    ],
+    UserComponent,
+    StatsComponent],
     imports: [
         FormsModule,
         AuthRoutingModule

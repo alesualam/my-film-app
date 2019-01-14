@@ -25,6 +25,8 @@ import { NotificationsComponent } from './core/notifications/notifications.compo
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImagesService } from './shared/images.service';
+import { UserComponent } from './auth/user/user.component';
+import { UserService } from './auth/user/user.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { ImagesService } from './shared/images.service';
     FilmsComponent,
     FilmEditorComponent,
     FilterPipe,
-    NotificationsComponent
+    NotificationsComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ import { ImagesService } from './shared/images.service';
     NgbModule
   ],
   providers: [AuthService, FilmService, DataStorageService, 
-    ImagesService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},],
+    ImagesService, UserService ,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

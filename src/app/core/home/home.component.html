@@ -1,25 +1,45 @@
 <div class="container">
-    <div class="row align-items-center">
-        <div class="col-xs-12 col-sm-12 col-md-12 mx-auto">
-            <h2 class="mt-5">Welcome to FilmApp!</h2>
-            <hr>
-            <ng-template [ngIf]="!getToken()">  
-                <p>Please <a routerLink="/signin">sign in</a> or <a routerLink="/signup">create an account</a> to start working.</p>
-            </ng-template>
-            <ng-template [ngIf]="getToken()">
-                <div class="instructions">
-                    <h4>How FilmApp works:</h4>
+  <div class="row align-items-center">
+    <div class="col-xs-12 col-sm-12 col-md-12 mx-auto">
+        <ng-template [ngIf]="!getToken()">
+          <h2 class="mt-5">Welcome to FilmApp!</h2>
+          <hr>
+          <p>Please <a routerLink="/signin">sign in</a> or <a routerLink="/signup">create an account</a> to start working.</p>
+        </ng-template>
+        <ng-template [ngIf]="getToken()">
+          <div class="instructions">
+            <br>
+              <ngb-tabset type="pills">
+                  <ngb-tab>
+                    <ng-template ngbTabTitle><b>Welcome</b></ng-template>
+                    <ng-template ngbTabContent>
+                      <p>Hi!</p>
+                      <p>FilmApp lets you store the films you have enjoyed or plan to watch and share them with the world.</p>
+                    </ng-template>
+                  </ngb-tab>
+                  <ngb-tab>
+                    <ng-template ngbTabTitle><b>Instructions</b></ng-template>
+                    <ng-template ngbTabContent>
+                      <ul>
+                        <li>1. Create any film you have watched or plan to watch.</li>
+                        <li>2. Set its details. </li>
+                        <li>3. Save & Edit your data. </li>
+                      </ul>
+                    </ng-template>
+                  </ngb-tab>
+                </ngb-tabset>
+                    <!-- <h4>How FilmApp works:</h4>
                     <br>
                     <ul>
                         <li>1. Create any film you have watched or plan to watch.</li>
                         <li>2. Set its details. </li>
                         <li>3. Save & Edit your data. </li>
                     </ul>
-                    <p>Go to <a routerLink="/films">My Films</a> to start working.</p>
-                </div>
-                <hr>
-            </ng-template>
-            <br>
-        </div>
-    </div>
+                    <p>Go to <a routerLink="/films">My Films</a> to start working.</p> -->
+            </div>
+            <hr>
+          </ng-template>
+          <br>
+      </div>
+  </div>
 </div>
