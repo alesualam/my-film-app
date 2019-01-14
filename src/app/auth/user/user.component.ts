@@ -24,19 +24,22 @@ export class UserComponent implements OnInit {
     this.storage.getUser();
     this.userSubscription = this.userService.userSubject.subscribe((user: User) => {
       this.user = user;
-      // console.log(this.user);
-      // console.log(this.user.username);
+      this.userService.user = user;
     });
 
     this.userForm = new FormGroup({
       'username': new FormControl(null, [Validators.required]),
       'bio': new FormControl(null),
+      'birth': new FormControl(null),
+      'avatar': new FormControl(null),
     });
 
     this.userService.startedEditing.subscribe((value) => {
       this.userForm.patchValue({
         'username': this.user.username,
         'bio': this.user.bio,
+        'birth': this.user.birth,
+        'avatar': this.user.avatar,
       });
     });
   }
@@ -48,7 +51,7 @@ export class UserComponent implements OnInit {
 
   onSubmit() {
     const userValues = this.userForm.value;
-    const userData = new User(userValues.username, userValues.bio, new Date(), "");
+    const userData = new User(userValues.username, userValues.bio, userValues.birth, userValues.avatar, this.user.film_objective);
 
     this.user = userData;
     this.userService.user = userData;

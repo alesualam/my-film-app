@@ -1,3 +1,22 @@
-<p>
-  stats works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="userstats mt-4">
+        <p><strong>Total films:</strong> {{ stats.total_films }}</p>
+        <p><strong>Fav films:</strong> {{ stats.fav_films }}</p>
+        <p><strong>Finished films:</strong> {{ stats.finished_films }}</p>
+        <p><strong>To-Watch films:</strong> {{ stats.towatch_films }}</p>
+        <br>
+        <p><strong>Watched last year:</strong> {{ stats.last_year }}</p>
+        <p><strong>Watched current year:</strong> {{ stats.current_year }}</p>
+        <p><strong>Your {{current_year}} objective:</strong> {{ userService.user.film_objective }}</p>
+      </div>
+
+        <p><ngb-progressbar type="success" value="{{ stats.objective }}" [striped]="true" [animated]="true"></ngb-progressbar></p>
+        <!-- <p><ngb-progressbar type="info" [value]="75" [striped]="true" [animated]="true"></ngb-progressbar></p>
+        <p><ngb-progressbar type="warning" [value]="50" [striped]="true" [animated]="true"></ngb-progressbar></p>
+        <p><ngb-progressbar type="danger" [value]="25" [striped]="true" [animated]="true"></ngb-progressbar></p> -->
+
+    </div>
+  </div>
+</div>

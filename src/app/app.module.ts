@@ -27,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ImagesService } from './shared/images.service';
 import { UserComponent } from './auth/user/user.component';
 import { UserService } from './auth/user/user.service';
+import { StatsComponent } from './auth/user/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UserService } from './auth/user/user.service';
     FilmEditorComponent,
     FilterPipe,
     NotificationsComponent,
-    UserComponent
+    UserComponent,
+    StatsComponent,
   ],
   imports: [
     BrowserModule,

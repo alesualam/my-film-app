@@ -15,24 +15,35 @@
                 <div class="bio">
                   <p>{{ user.bio }}</p>
                 </div>
+                <div class="birthday">
+                  <p>{{ user.birth }}</p>
+                </div>
+                <div class="birthday">
+                    <p>{{ user.film_objective }}</p>
+                </div>
                 <br>
                 <button class="btn btn-secondary" (click)="onEdit()">Edit</button>
               </div>
 
             <div class="col-md-6" *ngIf="userService.editMode">
               <form class="form mt-3" [formGroup]="userForm" (ngSubmit)="onSubmit()">
-                  <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">Username</div>
-                      </div>
-                      <input type="text" class="form-control" id="title" formControlName="username">
-                  </div>
-                  <div class="input-group mb-3 mr-sm-2">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">Bio</div>
-                      </div>
-                      <input type="text" class="form-control" id="title" formControlName="bio">
-                  </div>
+                <div class="edit-user mt-2">
+                  <label for="username"><strong>Username:</strong></label>
+                  <input type="text" class="form-control" formControlName="username">
+                </div>
+                <div class="edit-user mt-2">
+                  <label for="bio"><strong>Bio:</strong></label>
+                  <input type="text" class="form-control" formControlName="bio">
+                </div>
+                <div class="edit-user mt-2">
+                    <label for="birth"><strong>Birthday:</strong></label>
+                    <input type="date" class="form-control" id="birth" formControlName="birth"
+                    placeholder="yyyy-MM-dd"/>
+                </div>
+                <div class="edit-user mt-2">
+                    <label for="avatar"><strong>Avatar Url:</strong></label>
+                    <input type="text" class="form-control" formControlName="avatar">
+                </div>
                   <br>
                   <div class="btn-group">
                     <button class="btn btn-success" (click)="onSubmit()">Save</button>
@@ -48,7 +59,7 @@
           <ngb-tab>
             <ng-template ngbTabTitle><b>Stats</b></ng-template>
             <ng-template ngbTabContent>
-              <!-- content -->
+              <app-stats></app-stats>
             </ng-template>
           </ngb-tab>
         </ngb-tabset>

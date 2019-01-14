@@ -11,8 +11,9 @@ export class UserService {
     user: User = {
         'username': "",
         'bio': "",
-        'birth': new Date(),
-        'avatar': ""
+        'birth': null,
+        'avatar': "",
+        'film_objective': null,
     }
 
     constructor() {}
