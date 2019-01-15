@@ -3,23 +3,23 @@
   <div class="row">
     <div class="col-md-12">
       <br>
-      <ngb-tabset type="pills">
+      <ngb-tabset>
           <ngb-tab>
             <ng-template ngbTabTitle><b>My profile</b></ng-template>
             <ng-template ngbTabContent>
               <div class="mt-2 ml-1" *ngIf="!userService.editMode">
                 <img src="" alt="">
                 <div class="username">
-                  <h6>{{ user.username }}</h6>
+                  <h5>{{ user.username }}</h5>
                 </div>
                 <div class="bio">
-                  <p>{{ user.bio }}</p>
+                  <p><strong>Bio:</strong> {{ user.bio }}</p>
                 </div>
                 <div class="birthday">
-                  <p>{{ user.birth }}</p>
+                  <p><strong>Birthday:</strong> {{ user.birth }}</p>
                 </div>
                 <div class="birthday">
-                    <p>{{ user.film_objective }}</p>
+                  <p><strong>Your film objective:</strong> {{ user.film_objective }}</p>
                 </div>
                 <br>
                 <button class="btn btn-secondary" (click)="onEdit()">Edit</button>
@@ -43,6 +43,10 @@
                 <div class="edit-user mt-2">
                     <label for="avatar"><strong>Avatar Url:</strong></label>
                     <input type="text" class="form-control" formControlName="avatar">
+                </div>
+                <div class="edit-user mt-2">
+                    <label for="film_objective"><strong>Film Objective:</strong></label>
+                    <input type="text" class="form-control" formControlName="film_objective">
                 </div>
                   <br>
                   <div class="btn-group">

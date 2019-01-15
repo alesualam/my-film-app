@@ -32,6 +32,7 @@ export class UserComponent implements OnInit {
       'bio': new FormControl(null),
       'birth': new FormControl(null),
       'avatar': new FormControl(null),
+      'film_objective': new FormControl(null, [Validators.required]),
     });
 
     this.userService.startedEditing.subscribe((value) => {
@@ -40,6 +41,7 @@ export class UserComponent implements OnInit {
         'bio': this.user.bio,
         'birth': this.user.birth,
         'avatar': this.user.avatar,
+        'film_objective': this.user.film_objective,
       });
     });
   }
@@ -51,7 +53,7 @@ export class UserComponent implements OnInit {
 
   onSubmit() {
     const userValues = this.userForm.value;
-    const userData = new User(userValues.username, userValues.bio, userValues.birth, userValues.avatar, this.user.film_objective);
+    const userData = new User(userValues.username, userValues.bio, userValues.birth, userValues.avatar, userValues.film_objective);
 
     this.user = userData;
     this.userService.user = userData;

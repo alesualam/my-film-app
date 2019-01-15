@@ -1,22 +1,32 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="userstats mt-4">
-        <h4>Your stats:</h4>
+  <div class="row films mt-4">
+    <div class="col-md-3">
+      <div class="userstats">
+        <h4>Your films stats:</h4>
         <p><strong>Total films:</strong> {{ stats.total_films }}</p>
         <p><strong>Fav films:</strong> {{ stats.fav_films }}</p>
         <p><strong>Finished films:</strong> {{ stats.finished_films }}</p>
         <p><strong>To-Watch films:</strong> {{ stats.towatch_films }}</p>
-        <br>
+      </div>
+    </div>
+    <div class="col-md-4 mt-2">
+      <div style="display: block" *ngIf="togglePie">
+        <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"></canvas>
+      </div>
+    </div>
+    <div class="col-md-4">
+        <h4>{{ current_year }} stats:</h4>
         <p><strong>Watched last year:</strong> {{ stats.last_year }}</p>
         <p><strong>Watched current year:</strong> {{ stats.current_year }}</p>
         <p><strong>Your {{current_year}} objective:</strong> {{ userService.user.film_objective }}</p>
-      </div>
-
-        <p><ngb-progressbar type="{{ stats.objective_status }}" value="{{ stats.objective }}" [striped]="true" [animated]="true">
-          {{ stats.current_year }} of {{ userService.user.film_objective }}
+        <div class="user_progress mt-2">
+          <p><ngb-progressbar type="{{ stats.objective_status }}" value="{{ stats.objective }}" [striped]="true" [animated]="true">
+            {{ stats.current_year }} of {{ userService.user.film_objective }}
         </ngb-progressbar></p>
-
+      </div>
     </div>
   </div>
 </div>
