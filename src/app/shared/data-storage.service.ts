@@ -23,8 +23,10 @@ export class DataStorageService {
 
         this.httpClient.get<User>('https://ng-custom-app.firebaseio.com/' + this.authService.getUid() + '/user.json').subscribe(
             (user: User) => {
-                this.userService.user = user;
-                this.userService.userSubject.next(user);
+                if (user !== null) {
+                    this.userService.user = user;
+                    this.userService.userSubject.next(user);
+                }
             }
         );
     }
