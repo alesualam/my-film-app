@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { User } from './user.model';
 import { DataStorageService } from 'src/app/shared/data-storage.service';

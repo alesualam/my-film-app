@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row mt-4">
-    <div class="col-md-5">
+    <div class="col-md-7">
       <div class="btn-toolbar" role="toolbar">
           <div class="btn-group btn-group-sm" role="group" aria-label="Filters">
               <button type="button" class="btn btn-success mr-1" (click)="onEdit(null, null)">+Add: {{ filmService.filterStatus }}</button>
@@ -43,11 +43,11 @@
           </div>
         </div>
       </div>
-      <!-- <div class="col-md-6 ml-2 mt-2">
+      <div class="col-md-4 ml-2 mt-2">
         <p><ngb-progressbar type="{{ stats.objective_status }}" value="{{ stats.objective }}" [striped]="true" [animated]="true">
-            {{ stats.current_year }} of {{ userService.user.film_objective }}
+            {{ stats.current_year }} of {{ user.film_objective }}
         </ngb-progressbar></p>
-      </div> -->
+      </div>
   </div>
 
   <div class="row mt-4">

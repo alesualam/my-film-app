@@ -21,14 +21,12 @@ export class FilmsComponent implements OnInit, OnDestroy {
   films: Film[];
   uniqueYears: string[];
   p: number = 1;
-
-  stats;
-
-  user: User;
+  stats = this.statsService.stats;
+  user = this.userService.user;
 
   private subscription: Subscription;
-  private editSub: Subscription;
   private userSubscription: Subscription;
+  private editSub: Subscription;
 
   constructor(public filmService: FilmService, private smooth: SimpleSmoothScrollService, private storage: DataStorageService,
     private image: ImagesService, private statsService: StatsService, private userService: UserService) { }
@@ -41,17 +39,17 @@ export class FilmsComponent implements OnInit, OnDestroy {
       .subscribe(
         (films: Film[]) => {
           this.films = films;
-          this.statsService.films = films;
           this.uniqueYears = this.filmService.uniqueYears;
+
+          this.storage.getUser();
+          this.userSubscription = this.userService.userSubject.subscribe((user: User) => {
+            this.user = user;
+            this.statsService.films = this.films;
+            this.statsService.user = user;
+            this.stats = this.statsService.getStats();
+          });
         }
       );
-
-    // this.storage.getUser();
-    // this.userSubscription = this.userService.userSubject.subscribe((user: User) => {
-    //   this.statsService.user = user;
-    //   this.stats = this.statsService.getStats();
-    //   console.log(this.stats);
-    // });
 
     this.editSub = this.filmService.isEditing.subscribe((value) => {
       if(value) {
@@ -67,6 +65,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.editSub.unsubscribe();
+    this.userSubscription.unsubscribe();
     this.filmService.setFilms([]);
   }
 

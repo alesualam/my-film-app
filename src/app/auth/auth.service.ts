@@ -17,7 +17,7 @@ export class AuthService {
     signupError = false;
     signinError = false;
     errorType = '';
-    token: string;
+    token: string = null;
 
     constructor(private router: Router, private userService: UserService) {}
 

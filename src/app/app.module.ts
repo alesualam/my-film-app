@@ -18,6 +18,7 @@ import { SimpleSmoothScrollModule } from 'ng2-simple-smooth-scroll';
 import { FilterPipe } from './shared/filter.pipe';
 import { DataStorageService } from './shared/data-storage.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ChartsModule } from 'ng2-charts';
 
 import { AuthInterceptor } from "./shared/auth.interceptor";
 import { NotificationsComponent } from './core/notifications/notifications.component';
@@ -53,7 +54,8 @@ import { StatsService } from './auth/user/stats/stats.service';
     SimpleSmoothScrollModule,
     HttpClientModule,
     NgxPaginationModule,
-    NgbModule
+    NgbModule,
+    ChartsModule,
   ],
   providers: [AuthService, FilmService, DataStorageService, 
     ImagesService, UserService, StatsService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, ],

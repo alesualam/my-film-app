@@ -3,6 +3,9 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { fadeOutOnLeaveAnimation } from 'angular-animations';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { ImagesService } from 'src/app/shared/images.service';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/auth/user/user.service';
+import { StatsService } from 'src/app/auth/user/stats/stats.service';
 
 
 @Component({
@@ -15,7 +18,10 @@ import { ImagesService } from 'src/app/shared/images.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService: AuthService, private storage: DataStorageService, private image: ImagesService) {}
+  constructor(private authService: AuthService, private storage: DataStorageService, private image: ImagesService,
+    private userService: UserService, private statsService: StatsService) {}
+
+  private userSubscription: Subscription;
 
   ngOnInit() {
   }

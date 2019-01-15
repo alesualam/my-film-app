@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { User } from '../user.model';
 import { Film } from 'src/app/shared/films/film.model';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { FilmService } from 'src/app/shared/films/films.service';
+import { UserService } from '../user.service';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Injectable()
 export class StatsService {
 
-    constructor(private filmsService: FilmService) {}
+    constructor(private filmsService: FilmService, private userService: UserService, private storage: DataStorageService) {}
 
-    user: User;
+    user = this.userService.user;
     statsChanged = new Subject<any>();
     stats = {
         'total_films': null,
@@ -24,6 +26,9 @@ export class StatsService {
     
     films: Film[] = [];
     current_year = new Date().getFullYear();
+
+    userSubscription: Subscription;
+    filmsSubscription: Subscription;
 
     getStats() {
 
