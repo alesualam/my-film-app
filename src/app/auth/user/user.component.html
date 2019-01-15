@@ -7,8 +7,8 @@
           <ngb-tab>
             <ng-template ngbTabTitle><b>My profile</b></ng-template>
             <ng-template ngbTabContent>
-              <div class="mt-2 ml-1" *ngIf="!userService.editMode">
-                <img src="" alt="">
+              <div class="col-md-8 mt-2" *ngIf="!userService.editMode">
+                <!-- <img src="" alt="">
                 <div class="username">
                   <h5>{{ user.username }}</h5>
                 </div>
@@ -21,8 +21,18 @@
                 <div class="birthday">
                   <p><strong>Your film objective:</strong> {{ user.film_objective }}</p>
                 </div>
-                <br>
-                <button class="btn btn-secondary" (click)="onEdit()">Edit</button>
+                <button class="btn btn-secondary" (click)="onEdit()">Edit</button> -->
+                <div class="jumbotron">
+                    <h4 class="display-4">{{ user.username }}</h4>
+                    <p class="lead">{{ user.bio }}</p>
+                    <br>
+                    <hr class="my-2">
+                    <br>
+                    <p><strong>Films objective:</strong> {{ user.film_objective }}</p>
+                    <p class="lead">
+                      <button class="btn btn-primary" (click)="onEdit()">Edit</button>
+                    </p>
+                  </div>
               </div>
 
             <div class="col-md-6" *ngIf="userService.editMode">
