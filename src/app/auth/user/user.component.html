@@ -8,20 +8,6 @@
             <ng-template ngbTabTitle><b>My profile</b></ng-template>
             <ng-template ngbTabContent>
               <div class="col-md-8 mt-2" *ngIf="!userService.editMode">
-                <!-- <img src="" alt="">
-                <div class="username">
-                  <h5>{{ user.username }}</h5>
-                </div>
-                <div class="bio">
-                  <p><strong>Bio:</strong> {{ user.bio }}</p>
-                </div>
-                <div class="birthday">
-                  <p><strong>Birthday:</strong> {{ user.birth }}</p>
-                </div>
-                <div class="birthday">
-                  <p><strong>Your film objective:</strong> {{ user.film_objective }}</p>
-                </div>
-                <button class="btn btn-secondary" (click)="onEdit()">Edit</button> -->
                 <div class="jumbotron">
                     <h4 class="display-4">{{ user.username }}</h4>
                     <p class="lead">{{ user.bio }}</p>
