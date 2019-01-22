@@ -9,7 +9,6 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AuthService } from './auth/auth.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilmsComponent } from './shared/films/films.component';
 import { FilmService } from './shared/films/films.service';
 import { FilmEditorComponent } from './shared/films/film-editor/film-editor.component';
@@ -30,6 +29,8 @@ import { UserComponent } from './auth/user/user.component';
 import { UserService } from './auth/user/user.service';
 import { StatsComponent } from './auth/user/stats/stats.component';
 import { StatsService } from './auth/user/stats/stats.service';
+import { GamesComponent } from './shared/games/games.component';
+
 
 @NgModule({
   declarations: [
@@ -44,10 +45,10 @@ import { StatsService } from './auth/user/stats/stats.service';
     NotificationsComponent,
     UserComponent,
     StatsComponent,
+    GamesComponent,
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

@@ -6,6 +6,7 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { FilmsComponent } from './shared/films/films.component';
 import { AuthGuard } from './auth/auth-guard.service';
 import { UserComponent } from './auth/user/user.component';
+import { GamesComponent } from './shared/games/games.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,7 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'films', component: FilmsComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: UserComponent, canActivate: [AuthGuard]},
-
+  { path: 'games', component: GamesComponent, canActivate: [AuthGuard]},
 ]
 
 @NgModule({

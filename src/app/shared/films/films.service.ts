@@ -1,7 +1,6 @@
 import { Film } from './film.model';
 import { Subject } from 'rxjs';
 
-// TODO - Nuevas formas de ordenación
 export class FilmService {
 
   filmsChanged = new Subject<Film[]>();

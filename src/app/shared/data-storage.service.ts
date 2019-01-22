@@ -8,6 +8,8 @@ import { HttpClient, HttpRequest } from "@angular/common/http";
 import { Subject } from 'rxjs/Rx';
 import { User } from '../auth/user/user.model';
 import { UserService } from '../auth/user/user.service';
+import { GameService } from './games/games.service';
+import { Game } from './games/game.model';
 
 @Injectable()
 export class DataStorageService {
@@ -16,7 +18,7 @@ export class DataStorageService {
     saveSuccess = false;
 
     constructor(private httpClient: HttpClient, private filmService: FilmService, private authService: AuthService,
-        private userService: UserService) {}
+        private userService: UserService, private gameService: GameService) {}
 
     getUser() {
         const token = this.authService.getToken();
@@ -57,6 +59,29 @@ export class DataStorageService {
                     films = [];
                 }
                 this.filmService.setFilms(films);
+            }
+        )
+    }
+
+    storeGames() {
+        const req = new HttpRequest('PUT', 'https://ng-custom-app.firebaseio.com/' + this.authService.getUid() + '/games.json', this.gameService.getGames(), {
+            reportProgress: true,
+        });
+        console.log(req);
+        return this.httpClient.request(req);
+    }
+
+    getGames() {
+        const token = this.authService.getToken();
+
+        this.httpClient.get<Game[]>('https://ng-custom-app.firebaseio.com/' + this.authService.getUid() + '/games.json', {
+        })
+        .subscribe(
+            (games: Game[]) => {
+                if (games === null) {
+                    games = [];
+                }
+                this.gameService.setGames(games);
             }
         )
     }
