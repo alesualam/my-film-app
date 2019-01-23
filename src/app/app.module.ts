@@ -21,6 +21,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import { AuthInterceptor } from "./shared/auth.interceptor";
 import { NotificationsComponent } from './core/notifications/notifications.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -30,6 +31,7 @@ import { UserService } from './auth/user/user.service';
 import { StatsComponent } from './auth/user/stats/stats.component';
 import { StatsService } from './auth/user/stats/stats.service';
 import { GamesComponent } from './shared/games/games.component';
+import { GameService } from './shared/games/games.service';
 
 
 @NgModule({
@@ -49,6 +51,7 @@ import { GamesComponent } from './shared/games/games.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -59,7 +62,7 @@ import { GamesComponent } from './shared/games/games.component';
     ChartsModule,
   ],
   providers: [AuthService, FilmService, DataStorageService, 
-    ImagesService, UserService, StatsService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, ],
+    ImagesService, UserService, StatsService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}, GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,7 +8,7 @@ export class FilterPipe implements PipeTransform {
 
   transform(value: any, filterString: string, filterYear: string): any {
 
-    if (value.length === 0 || (filterString === '' && filterYear ==='')) {
+    if (value.length === 0 || (filterString === '' && filterYear === '')) {
       return value;
     }
     const resultArray = [];

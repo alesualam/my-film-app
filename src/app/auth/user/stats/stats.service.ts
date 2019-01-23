@@ -5,6 +5,7 @@ import { Subject, Subscription } from 'rxjs';
 import { FilmService } from 'src/app/shared/films/films.service';
 import { UserService } from '../user.service';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { Game } from 'src/app/shared/games/game.model';
 
 @Injectable()
 export class StatsService {
@@ -25,6 +26,7 @@ export class StatsService {
     }
     
     films: Film[] = [];
+    games: Game[] = [];
     current_year = new Date().getFullYear();
 
     userSubscription: Subscription;

@@ -1,3 +1,52 @@
-<p>
-  games works!
-</p>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-7">
+      <div class="btn-toolbar" role="toolbar">
+          <div class="btn-group btn-group-sm" role="group" aria-label="Filters">
+              <button type="button" class="btn btn-success mr-1" (click)="onEdit(null, null)">+Add: {{ gameService.filterStatus }}</button>
+          </div>
+
+          <div ngbDropdown class="d-inline-block mr-1">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Filter: {{ gameService.filterStatus }}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="dropdown-item" (click)="onFilter('')">Default</button>
+                <button class="dropdown-item" (click)="onFilter('Favorite')">Favorite</button>
+                <button class="dropdown-item" (click)="onFilter('Finished')">Finished</button>
+                <button class="dropdown-item" (click)="onFilter('In_Progress')">In Progress</button>
+                <button class="dropdown-item" (click)="onFilter('To_Play')">To Play</button>
+              </div>
+          </div>
+
+          <div ngbDropdown class="d-inline-block mr-1">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Year: {{ gameService.currentYear }}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button class="dropdown-item" (click)="onYearFilter('')">All</button>
+              <button class="dropdown-item"
+              *ngFor="let year of uniqueYears"
+              (click)="onYearFilter(year)">{{ year }}</button>
+            </div>
+          </div>
+
+          <div ngbDropdown class="d-inline-block mr-1">
+              <button class="btn btn-outline-secondary" id="dropdownBasic1" ngbDropdownToggle>Order: {{ gameService.orderStatus }}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="dropdown-item" (click)="onOrder('')">Default</button>
+                <button class="dropdown-item" (click)="onOrder('Title')">Title</button>
+                <button class="dropdown-item" (click)="onOrder('Latest')">Latest</button>
+              </div>
+          </div>
+
+          <div class="btn-group btn-group-sm" role="group" aria-label="Filters">
+              <button type="button" class="btn btn-outline-danger mr-1" 
+              (click)="onFilter('')"
+              (click)="onOrder('')"
+              (click)="onYearFilter('')">Reset Filters</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 ml-2 mt-2">
+        <p><ngb-progressbar type="{{ stats.objective_status }}" value="{{ stats.objective }}" [striped]="true" [animated]="true">
+            {{ stats.current_year }} of {{ user.film_objective }}
+        </ngb-progressbar></p>
+      </div>
+  </div>

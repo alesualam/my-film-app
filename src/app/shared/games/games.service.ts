@@ -1,21 +1,37 @@
 import { Game } from './game.model';
 import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class GameService {
 
     gamesChanged = new Subject<Game[]>();
     startedEditing = new Subject<number>();
     isEditing = new Subject<boolean>();
-    games: Game[] = [];
+    games: Game[] = [{
+        'title': "",
+        'platform': "",
+        'desc': "",
+        'score': 0,
+        'status': "",
+        'start_date': new Date(),
+        'finish_date': new Date(),
+        'fav': false,
+        'image': "",
+        'completion': 0
+    }];
 
     scores = Array.from(Array(11).keys()).reverse();
+
+    filterStatus = '';
     status_p = [
         'Finished',
         'In_Progress',
         'To_Play',
-    ]
+    ];
     orderStatus = '';
     uniqueYears = [];
+    currentYear = '';
 
     getGames() {
         this.orderby();
